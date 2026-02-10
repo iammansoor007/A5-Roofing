@@ -148,7 +148,7 @@ const Hero = () => {
             <div className="md:max-w-2xl lg:max-w-3xl  mx-auto md:mx-0">
               {/* Badge - Reduced bottom margin */}
               <motion.div
-                className="inline-flex  items-center gap-2 mb-4 md:mb-6 px-4 py-2 bg-accent/10 backdrop-blur-lg border border-accent/20 rounded-full mx-auto md:mx-0"
+                className="inline-flex  items-center gap-2 mb-3 md:mb-4 px-4 py-2 bg-accent/10 backdrop-blur-lg border border-accent/20 rounded-full mx-auto md:mx-0"
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={isLoaded ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -165,7 +165,7 @@ const Hero = () => {
               </motion.div>
 
               {/* Headline - Reduced bottom margin */}
-              <div className="mb-4 md:mb-6 text-center md:text-left">
+              <div className="mb-2 md:mb-3 text-center md:text-left">
                 <motion.h1
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7.5xl font-heading font-bold leading-[0.95] md:leading-[0.92] tracking-tight text-foreground"
                   initial={{ opacity: 0, y: 40 }}
@@ -180,7 +180,7 @@ const Hero = () => {
 
               {/* Subtitle - Reduced bottom margin */}
               <motion.p
-                className="text-foreground/80 max-w-xl md:max-w-lg text-base sm:text-lg md:text-xl leading-relaxed mb-6 md:mb-8 text-center md:text-left"
+                className="text-foreground/80 max-w-xl md:max-w-lg text-base sm:text-lg md:text-xl leading-relaxed mb-4 md:mb-5 text-center md:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -190,7 +190,7 @@ const Hero = () => {
 
               {/* Modern CTA Buttons - Reduced bottom margin and gap */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-3 sm:gap-3 mb-8 md:mb-10 justify-center md:justify-start"
+                className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-6 md:mb-8 justify-center md:justify-start"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.7 }}
@@ -275,7 +275,7 @@ const Hero = () => {
 
               {/* Modern Statistics - Reduced top padding and gaps */}
               <motion.div
-                className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-5 pt-6 md:pt-8 
+                className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 pt-4 md:pt-5 
                          border-t border-foreground/10 justify-center md:justify-start"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
