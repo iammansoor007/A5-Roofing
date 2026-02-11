@@ -13,6 +13,7 @@ import QAForm from "@/components/QAForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
+import AggressiveRoofingSection from "@/components/RoofingExperts";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -22,11 +23,14 @@ const Index = () => {
       <AnimatePresence>
         {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
       </AnimatePresence>
-      
+
       {!loading && (
         <>
           <Navbar />
           <Hero />
+          <section id="roofingexperts">
+            <AggressiveRoofingSection />
+          </section>
           <section id="services">
             <Services />
           </section>

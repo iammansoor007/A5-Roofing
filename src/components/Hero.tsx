@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroBg from "@/assets/mainbg.webp";
+import heroBg from "@/assets/maincarbg.webp";
 
-// Modern icon imports (install react-icons or use your preferred set)
+// Modern icon imports
 import {
   FiArrowRight,
   FiChevronDown,
@@ -51,7 +51,7 @@ const Hero = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-end overflow-hidden bg-primary isolate"
+      className="relative min-h-screen flex items-end overflow-hidden bg-gradient-to-br from-slate-950 via-primary-950 to-slate-900 isolate"
     >
       {/* Modern gradient mesh background */}
       <div className="absolute inset-0 -z-10">
@@ -65,15 +65,47 @@ const Hero = () => {
           }}
           transition={{ type: "spring", mass: 0.8, stiffness: 40, damping: 25 }}
         />
-        {/* Layered, sophisticated overlays
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-primary/70" /> */}
-
-
-
+        {/* EXACT overlays from enhanced version */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-primary-950/90 to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/40 via-transparent to-slate-900/40" />
         <div className="absolute inset-0 bg-gradient-to-bl from-primary/75 via-primary/50 to-primary/5" />
         <div className="absolute inset-0 bg-gradient-to-br z-1 opacity-50 from-primary/75 via-primary/50 to-primary/5" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12)_0%,_transparent_10%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(255,255,255,0.08)_0%,_transparent_10%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
+
+        {/* Enhanced light orbs - exact from my version */}
+        <motion.div
+          className="absolute top-[20%] right-[15%] w-[40rem] h-[40rem] bg-white/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            x: mousePosition.x * 0.3,
+            y: mousePosition.y * 0.3,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[10%] left-[10%] w-[30rem] h-[30rem] bg-primary-500/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.05, 0.1, 0.05],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          style={{
+            x: mousePosition.x * -0.2,
+            y: mousePosition.y * -0.2,
+          }}
+        />
       </div>
 
       {/* Subtle architectural grid */}
@@ -163,7 +195,7 @@ const Hero = () => {
         <div className="max-w-7xl mx-auto lg:mx-0 lg:max-w-6xl">
           {/* Premium badge */}
           <motion.div
-            className="flex items-center gap-2 mb-2 mt-8 md:mt-0"
+            className="flex items-center gap-2 mb-2 mt-8 md:-mt-4"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -250,7 +282,7 @@ const Hero = () => {
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
               >
-                <stat.icon className="w-7 h-7 md:w-8 md:h-8" />
+                <stat.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
                 <div>
                   <span className="block font-heading text-white text-2xl md:text-3xl lg:text-3xl font-bold leading-tight">
                     {stat.num}
@@ -267,7 +299,7 @@ const Hero = () => {
 
       {/* Refined scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+        className="absolute hidden sm:flex bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-3 z-20"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.2, duration: 0.6 }}

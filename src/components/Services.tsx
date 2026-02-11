@@ -65,7 +65,7 @@ const Services = () => {
               <p className="body-sm text-muted-foreground leading-relaxed">{service.description}</p>
               <div className="mt-6 flex items-center gap-2 text-foreground/70 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
                 <span className="font-body text-sm font-medium">Learn More</span>
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </div>
             </div>
           </motion.div>
