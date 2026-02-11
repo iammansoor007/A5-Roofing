@@ -248,20 +248,7 @@ const Navbar = () => {
                       className="absolute left-1/2 transform -translate-x-1/2 xl:left-0 xl:transform-none top-full mt-2 w-[90vw] max-w-[900px] bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 overflow-hidden"
                       style={{ zIndex: 1000 }}
                     >
-                      {/* Stats Bar */}
-                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-                        {stats.map((stat) => (
-                          <div key={stat.label} className="flex items-center space-x-3 p-4 bg-blue-50 rounded-xl border border-blue-100">
-                            <div className="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                              <stat.Icon />
-                            </div>
-                            <div>
-                              <div className="text-xl font-bold text-gray-900">{stat.value}</div>
-                              <div className="text-sm text-gray-700">{stat.label}</div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+
 
                       {/* Services Grid */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -515,22 +502,7 @@ const Navbar = () => {
                       </div>
                     </div>
 
-                    {/* Stats Grid */}
-                    <div className="mt-8">
-                      <div className="grid grid-cols-2 gap-3">
-                        {stats.map((stat) => (
-                          <div key={stat.label} className="p-4 rounded-xl bg-blue-50 border border-blue-100">
-                            <div className="flex items-center space-x-2 mb-2">
-                              <div className="text-blue-600">
-                                <stat.Icon />
-                              </div>
-                              <div className="text-lg font-bold text-gray-900">{stat.value}</div>
-                            </div>
-                            <div className="text-sm text-gray-700">{stat.label}</div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+
                   </div>
                 </div>
 

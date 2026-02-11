@@ -1,407 +1,294 @@
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroBg from "@/assets/mainbg.webp";
+
+// Modern icon imports (install react-icons or use your preferred set)
+import {
+  FiArrowRight,
+  FiChevronDown,
+  FiStar,
+  FiThumbsUp,
+} from "react-icons/fi";
+import { RiBuildingLine, RiShieldCheckLine } from "react-icons/ri";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Manual scroll handler
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    if (!sectionRef.current) return;
+    const img = sectionRef.current.querySelector(".hero-parallax-img");
+    if (img) {
+      gsap.to(img, {
+        y: 120,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      setMousePosition({
+        x: (clientX - innerWidth / 2) * 0.015,
+        y: (clientY - innerHeight / 2) * 0.015,
+      });
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Calculate manual parallax values
-  const manualParallaxY = Math.min(scrollY * 0.5, 200);
-  const manualScale = 1 + Math.min(scrollY * 0.0003, 0.03);
-
-  // Optimized scroll-based transforms
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-
-  // Instant-response transforms
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.03]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-
-  // Preload and set loaded state
-  useEffect(() => {
-    const img = new Image();
-    img.src = heroBg;
-
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 100);
-
-    img.onload = () => {
-      setImageLoaded(true);
-      setIsLoaded(true);
-      clearTimeout(timer);
-    };
-
-    return () => clearTimeout(timer);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
-    <>
-      {/* Minimal Loading State */}
-      <AnimatePresence>
-        {!isLoaded && (
-          <motion.div
-            className="fixed inset-0 bg-primary z-50 flex items-center justify-center"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="relative">
-              <div className="w-10 h-10 border-2 border-foreground/10 rounded-full" />
-              <div className="absolute inset-0 w-10 h-10 border-2 border-transparent border-t-accent rounded-full animate-spin" />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <section
+      ref={sectionRef}
+      className="relative min-h-screen flex items-end overflow-hidden bg-primary isolate"
+    >
+      {/* Modern gradient mesh background */}
+      <div className="absolute inset-0 -z-10">
+        <motion.img
+          src={heroBg}
+          alt=""
+          className="hero-parallax-img w-full h-[130%] object-cover absolute -top-[15%] will-change-transform"
+          style={{
+            x: mousePosition.x,
+            y: mousePosition.y - 20,
+          }}
+          transition={{ type: "spring", mass: 0.8, stiffness: 40, damping: 25 }}
+        />
+        {/* Layered, sophisticated overlays
+        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/95 to-primary/70" /> */}
 
-      <section
-        ref={sectionRef}
-        className="relative min-h-screen flex items-end overflow-hidden bg-primary"
-      >
-        {/* Background with DUAL parallax */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              transform: `translate3d(0, ${manualParallaxY}px, 0) scale(${manualScale})`,
-              willChange: 'transform'
-            }}
-          >
-            <img
-              src={heroBg}
-              alt="Luxury architectural roofing"
-              className={`w-full h-[110%] object-cover object-center absolute -top-[5%] transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-              loading="eager"
-              decoding="async"
-            />
-          </div>
 
-          {/* Animated gradient overlay */}
-          <div className={`absolute inset-0 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent md:bg-gradient-to-r md:from-primary/90 md:via-primary/60 md:to-transparent" />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-tr from-accent/10 via-transparent to-rose-500/5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.5 }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent" />
-          </div>
 
-          {/* Animated grid pattern */}
-          <motion.div
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.03 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            style={{
-              backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)`,
-              backgroundSize: "60px 60px",
-            }}
-          />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-bl from-primary/75 via-primary/50 to-primary/5" />
+        <div className="absolute inset-0 bg-gradient-to-br z-1 opacity-50 from-primary/75 via-primary/50 to-primary/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12)_0%,_transparent_10%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(255,255,255,0.08)_0%,_transparent_10%)]" />
+      </div>
 
-        {/* Animated floating elements */}
-        <div className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-          <motion.div
-            className="absolute top-[20%] right-[15%] w-16 h-16 md:w-20 md:h-20 border border-foreground/5 rounded-full"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
-          />
-          <motion.div
-            className="absolute bottom-[30%] left-[10%] w-12 h-12 border border-accent/10 rounded-full"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8, type: "spring" }}
-          />
-        </div>
-
-        {/* Main Content - Reduced gaps for larger screens */}
-        <div
-          ref={containerRef}
-          className="section-padding w-full relative z-10 pb-12 md:pb-16 lg:pb-20 pt-16 md:pt-20 lg:pt-24 h-screen flex items-center"
-        >
-          <motion.div
-            style={{ opacity: contentOpacity }}
-            className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <div className="md:max-w-2xl lg:max-w-3xl  mx-auto md:mx-0">
-              {/* Badge - Reduced bottom margin */}
-              <motion.div
-                className="inline-flex  items-center gap-2 mb-3 md:mb-4 px-4 py-2 bg-accent/10 backdrop-blur-lg border border-accent/20 rounded-full mx-auto md:mx-0"
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={isLoaded ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(var(--accent)/0.15)" }}
-              >
-                <motion.div
-                  className="w-2 h-2 bg-accent rounded-full"
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <span className="font-mono text-foreground/90 text-xs uppercase tracking-[0.3em] font-medium">
-                  Architectural Excellence
-                </span>
-              </motion.div>
-
-              {/* Headline - Reduced bottom margin */}
-              <div className="mb-2 md:mb-3 text-center md:text-left">
-                <motion.h1
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7.5xl font-heading font-bold leading-[0.95] md:leading-[0.92] tracking-tight text-foreground"
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                >
-                  <span className="block mb-[-0.05em]">Architectural</span>
-                  <span className="block mb-[-0.05em] text-accent">Mastery in</span>
-                  <span className="block">Every Detail</span>
-                </motion.h1>
-              </div>
-
-              {/* Subtitle - Reduced bottom margin */}
-              <motion.p
-                className="text-foreground/80 max-w-xl md:max-w-lg text-base sm:text-lg md:text-xl leading-relaxed mb-4 md:mb-5 text-center md:text-left"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                Where precision engineering meets timeless design. Award-winning craftsmanship since 2008.
-              </motion.p>
-
-              {/* Modern CTA Buttons - Reduced bottom margin and gap */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-2 sm:gap-3 mb-6 md:mb-8 justify-center md:justify-start"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                {/* Primary CTA */}
-                <motion.a
-                  href="#contact"
-                  className="group relative overflow-hidden px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 
-                           bg-gradient-to-r from-accent to-accent/80 text-primary font-heading 
-                           font-semibold text-sm sm:text-base tracking-tight rounded-xl
-                           inline-flex items-center justify-center gap-2 sm:gap-3 shadow-lg shadow-accent/20"
-                  whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(var(--accent)/0.3)" }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-accent via-accent-light to-accent"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.6 }}
-                  />
-
-                  <span className="relative z-10 flex items-center gap-1 sm:gap-2">
-                    Begin Consultation
-                    <motion.svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      initial={{ x: 0 }}
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <path
-                        d="M5 10H15M15 10L10 5M15 10L10 15"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </motion.svg>
-                  </span>
-                </motion.a>
-
-                {/* Secondary CTA */}
-                <motion.a
-                  href="#portfolio"
-                  className="group relative overflow-hidden px-6 py-3.5 sm:px-7 sm:py-4 md:px-8 md:py-4 
-                           border-2 border-foreground/20 text-foreground font-heading 
-                           font-semibold text-sm sm:text-base tracking-tight rounded-xl
-                           inline-flex items-center justify-center gap-2 sm:gap-3 backdrop-blur-sm
-                           hover:border-accent/50 hover:text-accent transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="relative z-10 flex items-center gap-1 sm:gap-2">
-                    Explore Portfolio
-                    <motion.svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      initial={{ rotate: -45 }}
-                      whileHover={{ rotate: 0 }}
-                      transition={{ type: "spring", stiffness: 200 }}
-                    >
-                      <path
-                        d="M10 17L15 12L10 7"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </motion.svg>
-                  </span>
-
-                  <motion.div
-                    className="absolute inset-0 bg-accent/5"
-                    initial={{ scale: 0 }}
-                    whileHover={{ scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.a>
-              </motion.div>
-
-              {/* Modern Statistics - Reduced top padding and gaps */}
-              <motion.div
-                className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 pt-4 md:pt-5 
-                         border-t border-foreground/10 justify-center md:justify-start"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.9 }}
-              >
-                {[
-                  {
-                    num: "300+",
-                    label: "Projects",
-                    suffix: "",
-                    accent: true,
-                    description: "Premium"
-                  },
-                  {
-                    num: "99.8",
-                    label: "Satisfaction",
-                    suffix: "%",
-                    accent: false,
-                    description: "Client Rate"
-                  },
-                  {
-                    num: "16",
-                    label: "Years",
-                    suffix: "+",
-                    accent: false,
-                    description: "Experience"
-                  },
-                  {
-                    num: "50+",
-                    label: "Awards",
-                    suffix: "",
-                    accent: false,
-                    description: "Industry"
-                  }
-                ].map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    className="text-center md:text-left group cursor-pointer"
-                    whileHover={{ y: -3 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="flex items-baseline justify-center md:justify-start gap-0.5">
-                      <span className={`font-heading text-2xl sm:text-2.5xl md:text-3xl font-bold ${stat.accent ? 'text-accent' : 'text-foreground'}`}>
-                        {stat.num}
-                      </span>
-                      {stat.suffix && (
-                        <span className="text-foreground/60 text-base sm:text-lg">{stat.suffix}</span>
-                      )}
-                    </div>
-                    <div className="text-foreground/70 text-sm font-medium tracking-wide mt-0.5">
-                      {stat.label}
-                    </div>
-                    <div className="text-foreground/50 text-xs font-mono tracking-wide hidden sm:block mt-0.5">
-                      {stat.description}
-                    </div>
-
-                    {/* Animated underline - smaller */}
-                    <motion.div
-                      className={`h-0.5 w-5 mx-auto md:mx-0 mt-1.5 ${stat.accent ? 'bg-accent' : 'bg-foreground/20'}`}
-                      initial={{ width: 5 }}
-                      whileHover={{ width: "100%" }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Scroll Indicator - Reduced size */}
-          {isLoaded && (
-            <motion.div
-              className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
+      {/* Subtle architectural grid */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="modernGrid"
+              x="0"
+              y="0"
+              width="50"
+              height="50"
+              patternUnits="userSpaceOnUse"
             >
-              <div className="flex flex-col items-center">
-                <motion.div
-                  className="w-px h-10 bg-gradient-to-b from-accent via-foreground/40 to-transparent"
-                  animate={{
-                    height: ["10px", "40px", "10px"],
-                    opacity: [0.4, 1, 0.4]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "loop"
-                  }}
-                />
-                <motion.span
-                  className="font-mono text-xs text-foreground/50 tracking-[0.4em] mt-2"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  SCROLL
-                </motion.span>
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Mobile Scroll Indicator */}
-        {isLoaded && (
-          <div className="md:hidden absolute bottom-4 left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center">
-              <motion.div
-                className="w-1 h-6 bg-gradient-to-b from-accent to-transparent rounded-full"
-                animate={{
-                  height: ["6px", "20px", "6px"],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  repeatType: "loop"
-                }}
+              <path
+                d="M 50 0 L 0 0 0 50"
+                fill="none"
+                stroke="rgba(255,255,255,0.15)"
+                strokeWidth="0.6"
               />
-              <span className="font-mono text-[10px] text-foreground/40 tracking-widest mt-1">
-                EXPLORE
-              </span>
-            </div>
-          </div>
-        )}
-      </section>
-    </>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#modernGrid)" />
+        </svg>
+      </div>
+
+      {/* Refined animated circles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-[20%] right-[12%] w-40 h-40 border border-white/10 rounded-full"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.8, delay: 0.8 }}
+          style={{
+            x: mousePosition.x * 0.4,
+            y: mousePosition.y * 0.4,
+          }}
+        />
+        <motion.div
+          className="absolute top-[12%] right-[5%] w-72 h-72 border border-white/5 rounded-full"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.8, delay: 1.0 }}
+          style={{
+            x: mousePosition.x * 0.25,
+            y: mousePosition.y * 0.25,
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[25%] left-[8%] w-56 h-56 border border-white/5 rounded-full"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.8, delay: 1.2 }}
+          style={{
+            x: mousePosition.x * -0.3,
+            y: mousePosition.y * -0.3,
+          }}
+        />
+      </div>
+
+      {/* Floating particles - more elegant */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1.5 h-1.5 bg-white/20 rounded-full blur-[1px]"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -40, 0],
+              opacity: [0.1, 0.4, 0.1],
+            }}
+            transition={{
+              duration: 5 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main content */}
+      <div className="section-padding w-full relative z-10 pb-20 md:pb-28">
+        <div className="max-w-7xl mx-auto lg:mx-0 lg:max-w-6xl">
+          {/* Premium badge */}
+          <motion.div
+            className="flex items-center gap-2 mb-2 mt-8 md:mt-0"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <div className="w-8 h-px bg-white/40 md:w-16" />
+            <span className="font-body text-white/80 text-xs md:text-sm uppercase tracking-[0.3em] font-light">
+              Architectural Excellence
+            </span>
+          </motion.div>
+
+          {/* Dynamic headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-7xl font-bold text-white mb-2 leading-[1.1] tracking-tight">
+            {["Engineering", "Roofs That", "Endure Time."].map((line, i) => (
+              <motion.span
+                key={i}
+                className="block overflow-hidden"
+                initial={{ opacity: 0, y: 80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.9,
+                  delay: 0.3 + 0.2 * i,
+                  ease: [0.215, 0.61, 0.355, 1],
+                }}
+              >
+                {line}
+              </motion.span>
+            ))}
+          </h1>
+
+          {/* Description with refined typography */}
+          <motion.p
+            className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mb-6 leading-relaxed font-light"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+          >
+            Precision-crafted roofing systems built for architectural
+            excellence, structural endurance, and timeless performance.
+          </motion.p>
+
+          {/* Modern button group */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-5"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.2 }}
+          >
+            <motion.a
+              href="#contact"
+              className="group bg-white text-primary px-8 py-4 font-medium text-lg inline-flex items-center justify-center gap-3 rounded-md hover:bg-white/90 transition-all duration-300 shadow-xl hover:shadow-2xl"
+              whileHover={{ scale: 1.03, x: 4 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Get Free Estimate
+              <FiArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
+            </motion.a>
+            <motion.a
+              href="#portfolio"
+              className="group backdrop-blur-sm bg-white/5 border border-white/20 text-white px-8 py-4 font-medium text-lg inline-flex items-center justify-center gap-3 rounded-md hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              View Our Work
+              <FiArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+            </motion.a>
+          </motion.div>
+
+          {/* Modern statistics with real icons */}
+          <motion.div
+            className="flex flex-wrap gap-10 md:gap-14 lg:gap-20 mt-8 md:mt-12 pt-6 border-t border-white/10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.5 }}
+          >
+            {[
+              { num: "1,200+", label: "Projects", icon: RiBuildingLine },
+              { num: "17+", label: "Years", icon: FiStar },
+              { num: "98%", label: "Satisfaction", icon: FiThumbsUp },
+              { num: "24/7", label: "Support", icon: RiShieldCheckLine },
+            ].map((stat, idx) => (
+              <motion.div
+                key={stat.label}
+                className="flex items-center gap-4"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+              >
+                <stat.icon className="w-7 h-7 md:w-8 md:h-8" />
+                <div>
+                  <span className="block font-heading text-white text-2xl md:text-3xl lg:text-3xl font-bold leading-tight">
+                    {stat.num}
+                  </span>
+                  <span className="font-body text-white text-xs uppercase tracking-wider">
+                    {stat.label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Refined scroll indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.2, duration: 0.6 }}
+      >
+        <span className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-light">
+          Discover
+        </span>
+        <motion.div
+          animate={{
+            y: [0, 6, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <FiChevronDown className="w-5 h-5 text-white/50" />
+        </motion.div>
+      </motion.div>
+    </section>
   );
 };
 
