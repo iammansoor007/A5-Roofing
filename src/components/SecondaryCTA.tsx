@@ -32,7 +32,7 @@ const SecondaryCTA = () => {
           <p className="body-lg text-muted-foreground mb-10 max-w-xl mx-auto">Stop treating your roof as an afterthought. Partner with engineers who understand structural systems and enduring performance.</p>
           <motion.a href="#contact" className="inline-flex items-center gap-3 bg-foreground text-primary px-10 py-5 font-heading font-medium text-lg tracking-tight" whileHover={{ scale: 1.03, boxShadow: "0 12px 50px hsl(0 0% 100% / 0.15)" }} whileTap={{ scale: 0.97 }}>
             Schedule Free Assessment
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10H15M15 10L10 5M15 10L10 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </motion.a>
         </div>
       </div>

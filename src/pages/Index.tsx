@@ -14,6 +14,7 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import LoadingScreen from "@/components/LoadingScreen";
 import AggressiveRoofingSection from "@/components/RoofingExperts";
+import HowWeWork from "@/components/HowWeWork";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ const Index = () => {
           <section id="portfolio">
             <Portfolio />
           </section>
+          <HowWeWork />
           <Testimonials />
           <section id="about">
             <Mission />

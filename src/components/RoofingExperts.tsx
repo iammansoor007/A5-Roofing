@@ -7,7 +7,7 @@ import {
     useSpring
 } from "framer-motion";
 import { useRef, useEffect, useState, useCallback, useMemo, memo } from "react";
-import RoofingExperince from "@/assets/roofingexperience.webp";
+import RoofingExperince from "@/assets/roofingmain.jpg";
 
 // ======================
 // Animated Counter Component - FIXED IMPORTS
