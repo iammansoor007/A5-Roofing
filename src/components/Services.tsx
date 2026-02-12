@@ -9,8 +9,7 @@ import {
 } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import serviceDetail from "@/assets/service-detail.jpg";
-import aboutImage from "@/assets/reveal2.jpg";
+import serviceDetail from "@/assets/bgabout.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -83,7 +83,7 @@ const projects = [
     year: "2024",
     accent: "from-blue-500 to-blue-700",
     architect: "Olson Kundig",
-    scope: "Storm Damage Repair"
+    scope: "Storm"
   },
 ];
 
@@ -349,6 +349,8 @@ const PortfolioItem = ({ project, index, onClick }) => {
 // ======================
 // PREMIUM BEFORE/AFTER SLIDER - AWARD WINNING
 // ======================
+// PREMIUM BEFORE/AFTER SLIDER - FIXED HANDLE (NO MOVEMENT)
+// ======================
 const BeforeAfterSlider = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -493,13 +495,12 @@ const BeforeAfterSlider = () => {
           {/* Gradient Line */}
           <div className="absolute inset-0 w-full bg-gradient-to-b from-blue-400 via-blue-600 to-blue-400 shadow-lg shadow-blue-600/50" />
 
-          {/* Premium Handle */}
+          {/* ✅ FIXED: Premium Handle - NO MOVEMENT ON HOVER */}
           <motion.div
             className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border-2 border-blue-600"
-            whileHover={{ scale: 1.15, boxShadow: "0 20px 40px rgba(37,99,235,0.3)" }}
-            whileTap={{ scale: 0.95 }}
+            style={{ x: 0, y: 0 }} // ✅ Force no movement
           >
-            {/* Double Arrow Icon */}
+            {/* Double Arrow Icons - Fixed position */}
             <div className="flex gap-1.5">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.2">
                 <path d="M15 18L9 12L15 6" strokeLinecap="round" strokeLinejoin="round" />
@@ -509,11 +510,12 @@ const BeforeAfterSlider = () => {
               </svg>
             </div>
 
-            {/* Pulse Ring */}
+            {/* Pulse Ring - No movement */}
             <motion.div
               className="absolute inset-0 rounded-full border-2 border-blue-400"
               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
+              style={{ x: 0, y: 0 }} // ✅ Force no movement
             />
           </motion.div>
         </motion.div>
@@ -591,7 +593,6 @@ const BeforeAfterSlider = () => {
     </motion.div>
   );
 };
-
 // ======================
 // PREMIUM LIGHTBOX - CINEMATIC
 // ======================
@@ -751,7 +752,7 @@ const Portfolio = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white overflow-hidden py-28 md:py-36"
+      className="relative bg-white overflow-hidden py-12 md:py-16"
     >
       {/* ====================== */}
       {/* PREMIUM BACKGROUND LAYERS */}

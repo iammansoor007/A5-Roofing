@@ -527,7 +527,7 @@ const GetQuote = () => {
 
     try {
       // Method 1: mailto fallback - opens default email client
-      const mailtoLink = `mailto:ammansoor007@gmail.com?subject=🔷 Legacy Engineering Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
+      const mailtoLink = `mailto:ammansoor007@gmail.com?subject=🔷 A5 Roofing Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
 
       // Try FormSubmit first, if it fails, open mailto
       try {
@@ -538,7 +538,7 @@ const GetQuote = () => {
             'Accept': 'application/json'
           },
           body: JSON.stringify({
-            _subject: `🔷 Legacy Engineering Quote Request - ${formData.name}`,
+            _subject: `🔷 A5 Roofing Quote Request - ${formData.name}`,
             name: formData.name,
             email: formData.email,
             phone: formData.phone,

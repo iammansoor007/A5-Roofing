@@ -1019,27 +1019,7 @@ const FAQ = () => {
         {/* ====================== */}
         {/* RESOURCE LINKS - ROOFING FOCUSED */}
         {/* ====================== */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-12 pt-8 border-t border-blue-100/50 faq-reveal">
-          <a href="/materials" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Roofing Materials
-          </a>
-          <span className="text-slate-300">•</span>
-          <a href="/inspection" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Schedule Inspection
-          </a>
-          <span className="text-slate-300">•</span>
-          <a href="/warranty" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Warranty Information
-          </a>
-          <span className="text-slate-300">•</span>
-          <a href="/estimate" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Free Estimate
-          </a>
-          <span className="text-slate-300">•</span>
-          <a href="/contact" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Contact Support
-          </a>
-        </div>
+
       </div>
     </section>
   );
