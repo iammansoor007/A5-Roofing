@@ -182,12 +182,12 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-blue backdrop-blur-xl shadow-lg py-2 border-b border-gray-100"
-          : "bg-blue-350 py-4"
+            ? "bg-white/80 backdrop-blur-xl shadow-lg py-2 border-b border-gray-100" // Optional: keep subtle white when scrolled
+            : "bg-transparent py-4" // ✅ TRANSPARENT when at top
           }`}
       >
         {/* Decorative accent line */}
-        <div className="absolute top-0 left-0 w-full h-[0.75px] bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500" />
+        <div className="absolute top-0 left-0 w-full h-[0.75px] bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400" />
 
         <div className="container mx-auto px-4 lg:px-8 ">
           <div className="flex items-center justify-between">
@@ -352,7 +352,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Primary CTA Button */}
+            {/* ✅ FIXED: Primary CTA Button - Only this line changed */}
             <motion.div
               className="hidden lg:flex items-center"
               whileHover={{ scale: 1.02 }}
@@ -362,7 +362,7 @@ const Navbar = () => {
                 href="#contact"
                 onClick={handleLinkClick}
                 onMouseEnter={() => setActiveMegaMenu(null)}
-                className="group relative bg-white text-blu Ge-700 px-7 py-3.5 rounded-xl font-semibold border border-blue-200 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-200/50 transition-all duration-300"
+                className="group relative bg-white text-blue-700 px-7 py-3.5 rounded-xl font-semibold border border-blue-200 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-200/50 transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center space-x-2">
                   <Calendar className="h-4 w-4 text-blue-600" />

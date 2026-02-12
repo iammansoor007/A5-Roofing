@@ -208,7 +208,7 @@ const Hero = () => {
 
           {/* Dynamic headline */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-7xl font-bold text-white mb-2 leading-[1.1] tracking-tight">
-            {["Precision Roofing", "Built for", "Long-Term Protection"].map((line, i) => (
+            {["Precision Roofing", "Built for Long-Term", " Protection"].map((line, i) => (
               <motion.span
                 key={i}
                 className="block overflow-hidden"
