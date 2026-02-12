@@ -425,7 +425,7 @@ const Testimonials = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white py-20 md:py-24 lg:py-28 overflow-hidden"
+      className="relative bg-white py-10 md:py-12 lg:py-14 overflow-hidden"
     >
       {/* Subtle Background */}
       <SubtleBackground />

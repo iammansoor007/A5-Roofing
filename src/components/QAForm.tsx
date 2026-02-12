@@ -633,7 +633,7 @@ const GetQuote = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white py-32 md:py-40 lg:py-48 overflow-hidden"
+      className="relative bg-white py-10 md:py-12 lg:py-14 overflow-hidden"
     >
       {/* ====================== */}
       {/* QUANTUM BACKGROUND */}
@@ -1083,24 +1083,11 @@ const GetQuote = () => {
                 </div>
               </div>
 
-              {/* Email Fallback Notice */}
-              <div className="mt-6 text-center">
-                <p className="text-[10px] text-slate-400 font-mono">
-                  Prefer direct email? <a href="mailto:ammansoor007@gmail.com" className="text-blue-600 hover:text-blue-800 underline underline-offset-2">ammansoor007@gmail.com</a>
-                </p>
-              </div>
             </div>
           </div>
         </motion.div>
 
-        {/* ====================== */}
-        {/* ARCHIVAL FOOTNOTE */}
-        {/* ====================== */}
-        <div className="text-center mt-16">
-          <p className="text-xs text-slate-400 font-mono tracking-wider">
-            All submissions are encrypted • Confidentiality guaranteed • Response within 4-8 hours
-          </p>
-        </div>
+
       </div>
 
       {/* ====================== */}

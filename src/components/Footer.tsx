@@ -307,11 +307,11 @@ const ContactInfo = () => {
         Contact
       </h4>
       <div className="space-y-3">
-        <a href="mailto:studio@legacy.engineering" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
+        <a href="mailto:studio@a5roofing.com" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
           <span className="text-blue-400/70 group-hover:text-blue-400">
             <Icons.Mail />
           </span>
-          studio@legacy.engineering
+          studio@a5roofing.com
         </a>
         <a href="tel:+12125550170" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
           <span className="text-blue-400/70 group-hover:text-blue-400">
@@ -412,7 +412,7 @@ const LegacyMarquee = () => {
               <Icons.Sparkle />
             </span>
             <span className="text-sm uppercase tracking-[0.3em] text-white/20">
-              ENGINEERING LEGACY
+              ENGINEERING A5 ROOFING
             </span>
             <span className="text-xs font-mono text-blue-400/40">
               <Icons.Sparkle />
@@ -567,11 +567,9 @@ const Footer = () => {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-2xl shadow-blue-600/30">
-                  <span className="text-white font-bold text-xl">L</span>
+                  <span className="text-white font-bold text-xl">A5</span>
                 </div>
-                <span className="text-sm font-mono tracking-[0.3em] uppercase text-white/60">
-                  LEGACY ENGINEERING
-                </span>
+
               </div>
 
               <p className="text-white/60 text-base leading-relaxed max-w-md">
@@ -584,7 +582,7 @@ const Footer = () => {
             {/* Newsletter */}
             <div className="space-y-4">
               <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-                Subscribe to legacy
+                Subscribe to A5 roofing insights
               </h4>
               <NewsletterForm />
             </div>
@@ -656,28 +654,9 @@ const Footer = () => {
         {/* ====================== */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 py-8 text-xs text-white/40">
           <div className="flex items-center gap-4">
-            <span>© 2026 Legacy Engineering</span>
+            <span>© 2026 A5 Roofing</span>
             <span className="w-1 h-1 rounded-full bg-white/20" />
             <span>All rights reserved</span>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <span className="font-mono">v3.2.1</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span>Made with precision in NYC</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="w-1.5 h-1.5 rounded-full bg-blue-500"
-            />
           </div>
         </div>
       </div>

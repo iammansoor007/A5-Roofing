@@ -1,16 +1,13 @@
 import {
     motion,
-    useScroll,
-    useTransform,
     useInView,
-    useReducedMotion,
-    useSpring
+    useReducedMotion
 } from "framer-motion";
 import { useRef, useEffect, useState, useCallback, useMemo, memo } from "react";
 import RoofingExperince from "@/assets/roofingmain.jpg";
 
 // ======================
-// Animated Counter Component - FIXED IMPORTS
+// Animated Counter Component
 // ======================
 const Counter = memo(({ value, suffix = "", duration = 1.8 }) => {
     const ref = useRef(null);
@@ -71,7 +68,7 @@ const Counter = memo(({ value, suffix = "", duration = 1.8 }) => {
 Counter.displayName = "Counter";
 
 // ======================
-// Simple Particles Component - NO LAZY LOADING
+// Simple Particles Component
 // ======================
 const ParticlesBackground = memo(() => {
     const particlesInit = useCallback(async (engine) => {
@@ -167,30 +164,16 @@ const StatCard = memo(({ value, suffix, label }) => {
 StatCard.displayName = "StatCard";
 
 // ======================
-// Main Section Component
+// Main Section Component - NO SCROLL ANIMATIONS
 // ======================
 export default function AggressiveRoofingSection() {
     const sectionRef = useRef(null);
     const shouldReduceMotion = useReducedMotion();
 
-    // Scroll animations
-    const { scrollYProgress } = useScroll({
-        target: sectionRef,
-        offset: ["start end", "end start"]
-    });
+    // ✅ NO SCROLL ANIMATIONS - removed all useScroll, useTransform, useSpring
+    // All scroll-based animations removed - image no longer moves vertically
 
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        restDelta: 0.001
-    });
-
-    const imageY = useTransform(smoothProgress, [0, 1], [0, -40]);
-    const imageRotate = useTransform(smoothProgress, [0, 1], [0, 1]);
-    const textY = useTransform(smoothProgress, [0, 1], [0, 30]);
-    const opacity = useTransform(smoothProgress, [0, 0.2, 0.9, 1], [0.6, 1, 1, 0.9]);
-
-    // Animation variants
+    // Animation variants - only for fade-in when in view
     const variants = useMemo(() => ({
         hidden: { opacity: 0, y: 30 },
         visible: (custom) => ({
@@ -222,9 +205,33 @@ export default function AggressiveRoofingSection() {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden py-24 md:py-32 lg:py-40"
+            className="relative bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden py-12 md:py-14 lg:py-16"
             aria-label="Roofing services overview"
         >
+            {/* ====================== */}
+            {/* PREMIUM TOP DIVIDER - ADDED BACK */}
+            {/* ====================== */}
+            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none rotate-180">
+                <svg
+                    viewBox="0 0 1440 120"
+                    className="relative block w-full h-[50px] sm:h-[70px] md:h-[90px]"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                >
+                    <defs>
+                        <linearGradient id="premium-divider-header" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#1e40af" stopOpacity="0.1" />
+                            <stop offset="50%" stopColor="#2563eb" stopOpacity="0.2" />
+                            <stop offset="100%" stopColor="#1e40af" stopOpacity="0.1" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        fill="url(#premium-divider-header)"
+                        d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+                    />
+                </svg>
+            </div>
+
             {/* Background Layer */}
             <div className="absolute inset-0">
                 <ParticlesBackground />
@@ -273,16 +280,10 @@ export default function AggressiveRoofingSection() {
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div
-                    style={{ opacity }}
-                    className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center"
-                >
-                    {/* Image Column */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
+
+                    {/* Image Column - NO SCROLL MOVEMENT */}
                     <motion.div
-                        style={{
-                            y: shouldReduceMotion ? 0 : imageY,
-                            rotate: shouldReduceMotion ? 0 : imageRotate
-                        }}
                         variants={variants}
                         initial="hidden"
                         whileInView="visible"
@@ -316,7 +317,7 @@ export default function AggressiveRoofingSection() {
                                     <div className="bg-white/95 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-xl border border-white/50">
                                         <span className="flex items-center gap-2 text-sm font-bold text-blue-800">
                                             <span className="text-lg">✓</span>
-                                            25+ Years Excellence
+                                            17+ Years Excellence
                                         </span>
                                     </div>
                                 </motion.div>
@@ -324,9 +325,8 @@ export default function AggressiveRoofingSection() {
                         </div>
                     </motion.div>
 
-                    {/* Content Column */}
+                    {/* Content Column - NO SCROLL MOVEMENT */}
                     <motion.div
-                        style={{ y: shouldReduceMotion ? 0 : textY }}
                         variants={variants}
                         initial="hidden"
                         whileInView="visible"
@@ -342,7 +342,7 @@ export default function AggressiveRoofingSection() {
                         >
                             <span className="text-blue-600 text-lg">⚡</span>
                             <span className="text-blue-700 uppercase tracking-[0.2em] text-xs sm:text-sm font-bold">
-                                Since 1998
+                                Since 2009
                             </span>
                         </motion.div>
 
@@ -354,13 +354,13 @@ export default function AggressiveRoofingSection() {
                                 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight"
                             >
                                 <span className="block text-slate-900">
-                                    BUILT
+                                    Fast Roofing
                                 </span>
                                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900">
-                                    TO OUTLAST
+                                    Long-Term
                                 </span>
                                 <span className="block text-slate-900">
-                                    THE ELEMENTS
+                                    Relationships.
                                 </span>
                             </motion.h2>
 
@@ -387,31 +387,53 @@ export default function AggressiveRoofingSection() {
                             custom={6}
                             className="flex flex-wrap items-center gap-4 pt-2"
                         >
-                            <motion.button
+                            <motion.a
+                                href="#contact"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="group relative px-8 py-4 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                                className="group relative px-8 py-4 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
                                     FREE INSPECTION
-                                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    <svg
+                                        className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                        />
                                     </svg>
                                 </span>
-                            </motion.button>
+                            </motion.a>
 
-                            <motion.button
+                            <motion.a
+                                href="#portfolio"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="group px-8 py-4 bg-white text-blue-800 font-bold rounded-full border-2 border-blue-200 hover:border-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                                className="group inline-block px-8 py-4 bg-white text-blue-800 font-bold rounded-full border-2 border-blue-200 hover:border-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 <span className="flex items-center gap-2">
                                     VIEW PORTFOLIO
-                                    <svg className="w-5 h-5 group-hover:rotate-45 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7l7-7M7 7l7 7M7 7h10" />
+                                    <svg
+                                        className="w-5 h-5 group-hover:rotate-45 transition-transform"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M7 7l7-7M7 7l7 7M7 7h10"
+                                        />
                                     </svg>
                                 </span>
-                            </motion.button>
+                            </motion.a>
                         </motion.div>
 
                         {/* Stats Grid */}
@@ -466,11 +488,11 @@ export default function AggressiveRoofingSection() {
                             </div>
                         </motion.div>
                     </motion.div>
-                </motion.div>
+                </div>
             </div>
 
             {/* ====================== */}
-            {/* PREMIUM BOTTOM DIVIDER - ADDED BACK */}
+            {/* PREMIUM BOTTOM DIVIDER */}
             {/* ====================== */}
             <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
                 <svg
@@ -492,30 +514,6 @@ export default function AggressiveRoofingSection() {
                     />
                 </svg>
             </div>
-
-            {/* Optional: Top Divider - Uncomment if you want one at the top too */}
-            {/* 
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-20 pointer-events-none rotate-180">
-                <svg
-                    viewBox="0 0 1440 120"
-                    className="relative block w-full h-[50px] sm:h-[70px] md:h-[90px]"
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                >
-                    <defs>
-                        <linearGradient id="premium-divider-header" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#1e40af" stopOpacity="0.1" />
-                            <stop offset="50%" stopColor="#2563eb" stopOpacity="0.2" />
-                            <stop offset="100%" stopColor="#1e40af" stopOpacity="0.1" />
-                        </linearGradient>
-                    </defs>
-                    <path
-                        fill="url(#premium-divider-header)"
-                        d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-                    />
-                </svg>
-            </div>
-            */}
         </section>
     );
 }

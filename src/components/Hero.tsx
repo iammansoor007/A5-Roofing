@@ -208,7 +208,7 @@ const Hero = () => {
 
           {/* Dynamic headline */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-7xl font-bold text-white mb-2 leading-[1.1] tracking-tight">
-            {["Engineering", "Roofs That", "Endure Time."].map((line, i) => (
+            {["Precision Roofing", "Built for", "Long-Term Protection"].map((line, i) => (
               <motion.span
                 key={i}
                 className="block overflow-hidden"
@@ -227,13 +227,12 @@ const Hero = () => {
 
           {/* Description with refined typography */}
           <motion.p
-            className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mb-6 leading-relaxed font-light"
+            className="text-m sm:text-l md:text-xl text-white/80 max-w-2xl mb-6 leading-relaxed font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
           >
-            Precision-crafted roofing systems built for architectural
-            excellence, structural endurance, and timeless performance.
+            Your roof protects your home, business, and everything inside from weather, moisture, and structural damage. When problems appear, they can quickly become costly without professional care.
           </motion.p>
 
           {/* Modern button group */}

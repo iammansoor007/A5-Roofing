@@ -49,6 +49,50 @@ const Icons = {
       <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   ),
+  Roof: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M3 10L12 3L21 10L18 13L12 8L6 13L3 10Z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6 13V19H18V13" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Shield: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L2 7v7c0 5.5 10 8 10 8s10-2.5 10-8V7l-10-5z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Clock: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Storm: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M4 14.5C4 16.985 6.015 19 8.5 19h7c2.485 0 4.5-2.015 4.5-4.5S17.985 10 15.5 10H14" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M10 10L8 13H12L10 16" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 5L9 8H14L12 11" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  DocumentCheck: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M14 2v6h6" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M9 15l2 2 4-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  Tools: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M14.7 6.3L19 2L22 5L17.7 9.3" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M9.3 17.7L5 22L2 19L6.3 14.7" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M16 8L8 16" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Home: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M3 10L12 3L21 10L18 13L12 8L6 13L3 10Z" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="8" y="13" width="8" height="8" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
 };
 
 // ======================
@@ -645,7 +689,7 @@ const KnowledgeCard = () => {
                 Still have questions?
               </h4>
               <p className="text-blue-200 text-base md:text-lg">
-                Our engineering team is ready to help with your specific project needs.
+                Our roofing specialists are ready to help with your specific project needs.
               </p>
             </div>
           </div>
@@ -658,7 +702,7 @@ const KnowledgeCard = () => {
             className="relative px-7 py-3.5 md:px-8 md:py-4 bg-white text-blue-900 text-xs md:text-sm font-medium rounded-full shadow-2xl overflow-hidden group/btn whitespace-nowrap"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Contact Engineering Team
+              Contact Our Team
               <motion.svg
                 width="18"
                 height="18"
@@ -688,7 +732,7 @@ const KnowledgeCard = () => {
 };
 
 // ======================
-// MAIN FAQ SECTION - UPGRADED
+// MAIN FAQ SECTION - ROOFING SPECIFIC
 // ======================
 const FAQ = () => {
   const sectionRef = useRef(null);
@@ -699,108 +743,144 @@ const FAQ = () => {
 
   const categories = [
     { id: 'all', label: 'All Questions', icon: null },
-    { id: 'process', label: 'Process', icon: '◈' },
-    { id: 'technical', label: 'Technical', icon: '⌗' },
-    { id: 'warranty', label: 'Warranty', icon: '🛡️' },
-    { id: 'commercial', label: 'Commercial', icon: '⎔' },
+    { id: 'general', label: 'General', icon: <Icons.Home /> },
+    { id: 'repair', label: 'Repair', icon: <Icons.Tools /> },
+    { id: 'warranty', label: 'Warranty', icon: <Icons.Shield /> },
+    { id: 'emergency', label: 'Emergency', icon: <Icons.Storm /> },
   ];
 
   const faqItems = [
     {
       id: 1,
-      category: 'process',
-      question: "What does your discovery and consultation process involve?",
-      answer: "We begin with a comprehensive site assessment and structural analysis. Our engineers evaluate your property's specific conditions, discuss your vision and requirements, and provide a detailed proposal including material recommendations, timeline estimates, and budget parameters. This initial phase typically takes 2-3 business days.",
+      category: 'general',
+      question: "How long does a roof last?",
+      answer: "The lifespan of a roof depends on the material, installation quality, climate conditions, and ongoing maintenance. Most asphalt shingle roofs typically last between 20 to 30 years, while metal roofing systems can last 40 years or more when properly maintained. Regular inspections, timely repairs, and good ventilation can significantly extend the life of any roofing system and help prevent early deterioration.",
       metadata: [
-        { label: "Duration", value: "2-3 days" },
-        { label: "Deliverables", value: "Site analysis + proposal" }
+        { label: "Asphalt shingle", value: "20-30 years" },
+        { label: "Metal roofing", value: "40+ years" }
       ],
       links: [
-        { label: "Learn about our process", url: "/process" }
+        { label: "Learn about roofing materials", url: "/materials" }
       ]
     },
     {
       id: 2,
-      category: 'technical',
-      question: "What roofing materials do you specialize in?",
-      answer: "We specialize in premium materials including standing seam metal, copper, slate, TPO, EPDM, and modified bitumen systems. Each material is selected based on your project's specific requirements for durability, aesthetics, and environmental conditions. We work exclusively with top-tier manufacturers to ensure the highest quality.",
+      category: 'repair',
+      question: "What are signs my roof needs repair?",
+      answer: "Common warning signs include water leaks, missing or curling shingles, ceiling stains, mold growth, soft roof areas, or visible sagging. You may also notice higher energy bills caused by poor roof ventilation or insulation damage. Even small symptoms can indicate hidden structural issues, so scheduling a professional roof inspection early can prevent more serious and expensive repairs later.",
       metadata: [
-        { label: "Warranty", value: "Up to 50 years" },
-        { label: "Certifications", value: "LEED, ENERGY STAR" }
+        { label: "Warning signs", value: "Leaks, stains, curling" },
+        { label: "Action", value: "Inspect immediately" }
       ],
       links: [
-        { label: "View materials", url: "/materials" }
+        { label: "Schedule inspection", url: "/inspection" }
       ]
     },
     {
       id: 3,
-      category: 'warranty',
-      question: "What warranty coverage do you provide?",
-      answer: "All our work comes with a comprehensive 25-year workmanship warranty, in addition to manufacturer warranties on materials which can range from 20-50 years depending on the product. We also offer optional extended warranty programs and preventive maintenance plans.",
+      category: 'general',
+      question: "How much does roof replacement cost?",
+      answer: "Roof replacement costs vary based on several factors such as roof size, material type, structural condition, labor requirements, and project complexity. Because every property is different, the most accurate way to determine cost is through a professional inspection and written estimate. Investing in a high-quality replacement often reduces long-term repair expenses and increases overall property value.",
       metadata: [
-        { label: "Coverage", value: "25 years" },
-        { label: "Transferable", value: "Yes" }
+        { label: "Factors", value: "Size, material, complexity" },
+        { label: "Best approach", value: "Free estimate" }
       ],
       links: [
-        { label: "Warranty details", url: "/warranty" }
+        { label: "Get a free estimate", url: "/estimate" }
       ]
     },
     {
       id: 4,
-      category: 'commercial',
-      question: "Do you handle large-scale commercial projects?",
-      answer: "Yes, we specialize in commercial and industrial roofing systems. Our portfolio includes tech campuses, distribution centers, historic commercial buildings, and multi-family residential complexes. We have the capacity and expertise to handle projects of any scale.",
+      category: 'emergency',
+      question: "Do you provide emergency roofing services?",
+      answer: "Yes. Emergency roofing services are available to quickly address storm damage, sudden leaks, fallen debris, or structural failures that threaten your property's safety. Rapid response helps minimize interior damage, prevent mold growth, and stabilize the roofing system until permanent repairs or replacement can be completed. Acting quickly during emergencies can save significant time and repair costs.",
       metadata: [
-        { label: "Scale", value: "10k-2M+ sq ft" },
-        { label: "Timeline", value: "4-18 months" }
-      ],
-      links: [
-        { label: "Commercial portfolio", url: "/portfolio" }
-      ]
-    },
-    {
-      id: 5,
-      category: 'process',
-      question: "How long does a typical residential project take?",
-      answer: "Project timelines vary based on scope and complexity. A standard residential roof replacement typically takes 3-5 days. More complex projects involving custom metalwork or historic restoration may take 2-3 weeks. We provide detailed timeline estimates during the consultation phase.",
-      metadata: [
-        { label: "Standard", value: "3-5 days" },
-        { label: "Complex", value: "2-3 weeks" }
-      ]
-    },
-    {
-      id: 6,
-      category: 'technical',
-      question: "Do you offer emergency repair services?",
-      answer: "Yes, we provide 24/7 emergency response for urgent structural issues. Our rapid-response team can typically assess damage within 4 hours of your call and begin necessary temporary protections immediately.",
-      metadata: [
-        { label: "Response", value: "<4 hours" },
-        { label: "Coverage", value: "Nationwide" }
+        { label: "Response", value: "24/7 availability" },
+        { label: "Coverage", value: "All areas" }
       ],
       links: [
         { label: "Emergency services", url: "/emergency" }
       ]
     },
     {
-      id: 7,
-      category: 'warranty',
-      question: "Is your warranty transferable if I sell my property?",
-      answer: "Yes, our 25-year workmanship warranty is fully transferable to subsequent owners. This adds significant value to your property and provides peace of mind to future buyers. There is a nominal administrative fee for warranty transfer.",
+      id: 5,
+      category: 'general',
+      question: "How often should roofs be inspected?",
+      answer: "Roofs should be professionally inspected at least once each year and always after major storms, hail, or high-wind events. Regular inspections help detect hidden damage, aging materials, drainage issues, and ventilation problems before they become serious. Preventive maintenance based on inspection findings can extend roof lifespan, improve performance, and protect your home or business from unexpected repair expenses.",
       metadata: [
-        { label: "Transferable", value: "Yes" },
-        { label: "Fee", value: "Nominal" }
+        { label: "Routine", value: "Annually" },
+        { label: "After storms", value: "Immediately" }
+      ],
+      links: [
+        { label: "Maintenance plans", url: "/maintenance" }
+      ]
+    },
+    {
+      id: 6,
+      category: 'warranty',
+      question: "Will my insurance cover roof damage?",
+      answer: "In many cases, storm-related damage such as hail, wind, or falling debris may be covered by homeowners insurance, depending on your policy terms and the cause of damage. A professional roof inspection with proper documentation and photos can help support your claim and ensure the damage is accurately reported. Working with an experienced roofing contractor during the insurance process can make the approval and repair timeline much smoother.",
+      metadata: [
+        { label: "Coverage", value: "Storm damage" },
+        { label: "Documentation", value: "Inspection report" }
+      ],
+      links: [
+        { label: "Insurance guidance", url: "/insurance" }
+      ]
+    },
+    {
+      id: 7,
+      category: 'general',
+      question: "How long does a roof replacement take?",
+      answer: "Most residential roof replacements are completed within one to three days, depending on the roof size, weather conditions, material type, and structural complexity. Larger or commercial projects may take longer to ensure proper installation and safety. Professional planning, skilled crews, and quality materials help ensure the project is completed efficiently without compromising workmanship or long-term durability.",
+      metadata: [
+        { label: "Residential", value: "1-3 days" },
+        { label: "Commercial", value: "Varies" }
+      ],
+      links: [
+        { label: "Our process", url: "/process" }
       ]
     },
     {
       id: 8,
-      category: 'process',
-      question: "Do you handle permit acquisition and inspections?",
-      answer: "Absolutely. We manage the entire permitting process, including submitting plans to local authorities, scheduling all required inspections, and ensuring final sign-off. This is included in our project management services.",
+      category: 'repair',
+      question: "Can a small roof leak become a serious problem?",
+      answer: "Yes. Even a minor leak can allow water to reach insulation, drywall, framing, and electrical systems, leading to mold growth, structural weakening, and costly interior repairs. Because leaks often spread beyond the visible area, early detection and prompt repair are essential. Addressing small roofing issues quickly is the most effective way to protect your property and avoid major expenses later.",
       metadata: [
-        { label: "Success rate", value: "99.8%" },
-        { label: "Avg. time", value: "14 days" }
+        { label: "Risk", value: "Mold, structural damage" },
+        { label: "Action", value: "Repair immediately" }
+      ],
+      links: [
+        { label: "Schedule repair", url: "/repair" }
       ]
     },
+    {
+      id: 9,
+      category: 'general',
+      question: "What roofing materials are best for long-term durability?",
+      answer: "Popular long-lasting roofing materials include architectural asphalt shingles, metal roofing, tile, and certain flat-roof membrane systems. The best choice depends on climate, budget, building design, and energy-efficiency goals. A professional roofing evaluation can help determine which material offers the best balance of durability, appearance, and long-term value for your specific property.",
+      metadata: [
+        { label: "Metal", value: "40+ years" },
+        { label: "Architectural shingles", value: "30+ years" },
+        { label: "Tile", value: "50+ years" }
+      ],
+      links: [
+        { label: "Material guide", url: "/materials" }
+      ]
+    },
+    {
+      id: 10,
+      category: 'warranty',
+      question: "Why is professional roof installation important?",
+      answer: "Proper installation is critical because even high-quality materials can fail if installed incorrectly. Professional roofing contractors follow manufacturer guidelines, safety standards, ventilation requirements, and structural best practices to ensure long-term performance. Correct installation not only extends roof lifespan but also protects warranties, improves energy efficiency, and reduces the risk of future repairs.",
+      metadata: [
+        { label: "Warranty protection", value: "Manufacturer requires" },
+        { label: "Performance", value: "Maximized lifespan" }
+      ],
+      links: [
+        { label: "Our credentials", url: "/about" }
+      ]
+    }
   ];
 
   const filteredItems = faqItems.filter(item => {
@@ -865,7 +945,7 @@ const FAQ = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
 
         {/* ====================== */}
-        {/* SECTION HEADER - KEPT SAME */}
+        {/* SECTION HEADER - ROOFING FOCUSED */}
         {/* ====================== */}
         <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 faq-reveal">
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-blue-600 mb-3 block">
@@ -875,7 +955,7 @@ const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-slate-500 text-base md:text-lg">
-            Everything you need to know about our process, materials, and commitment.
+            Expert answers to common questions about roofing, repairs, materials, and protection for your property.
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto mt-6 rounded-full" />
         </div>
@@ -893,7 +973,7 @@ const FAQ = () => {
         </div>
 
         {/* ====================== */}
-        {/* ACCORDION GRID - UPGRADED */}
+        {/* ACCORDION GRID - UPGRADED WITH ROOFING FAQS */}
         {/* ====================== */}
         <div className="space-y-3 md:space-y-4 mb-12 md:mb-16">
           {filteredItems.length > 0 ? (
@@ -932,24 +1012,28 @@ const FAQ = () => {
         </div>
 
         {/* ====================== */}
-        {/* KNOWLEDGE CARD - PREMIUM UPGRADED */}
+        {/* KNOWLEDGE CARD - ROOFING SPECIFIC */}
         {/* ====================== */}
         <KnowledgeCard />
 
         {/* ====================== */}
-        {/* RESOURCE LINKS - KEPT SAME */}
+        {/* RESOURCE LINKS - ROOFING FOCUSED */}
         {/* ====================== */}
         <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mt-12 pt-8 border-t border-blue-100/50 faq-reveal">
-          <a href="/process" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Our Process
+          <a href="/materials" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
+            Roofing Materials
           </a>
           <span className="text-slate-300">•</span>
-          <a href="/materials" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Materials
+          <a href="/inspection" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
+            Schedule Inspection
           </a>
           <span className="text-slate-300">•</span>
           <a href="/warranty" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
-            Warranty
+            Warranty Information
+          </a>
+          <span className="text-slate-300">•</span>
+          <a href="/estimate" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">
+            Free Estimate
           </a>
           <span className="text-slate-300">•</span>
           <a href="/contact" className="text-xs md:text-sm text-slate-500 hover:text-blue-600 transition-colors">

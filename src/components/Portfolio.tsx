@@ -52,7 +52,7 @@ const projects = [
   {
     number: "03",
     title: "Heritage Museum",
-    category: "Historic",
+    category: "Storm Damage Repair",
     image: portfolio3,
     size: "small",
     location: "Boston, MA",
@@ -83,7 +83,7 @@ const projects = [
     year: "2024",
     accent: "from-blue-500 to-blue-700",
     architect: "Olson Kundig",
-    scope: "Historic Restoration"
+    scope: "Storm Damage Repair"
   },
 ];
 
@@ -696,7 +696,7 @@ const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("all");
 
   // Premium filter system
-  const categories = ["all", "residential", "commercial", "historic", "industrial", "luxury estate"];
+  const categories = ["all", "residential", "commercial", "storm damage", "industrial", "luxury estate"];
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "all") return projects;
@@ -798,7 +798,8 @@ const Portfolio = () => {
             </h2>
           </div>
           <p className="portfolio-reveal text-slate-600 text-lg max-w-md leading-relaxed">
-            From heritage estates to technological campuses — each project represents the pinnacle of engineering artistry and architectural precision.
+            A5 Roofing is built on a strong foundation of integrity, discipline, and an unwavering commitment to customer care. Every project we complete reflects careful attention to detail, honest communication, and a genuine focus.
+
           </p>
         </motion.div>
 

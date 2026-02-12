@@ -194,7 +194,7 @@ const CTASection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white py-28 md:py-36 lg:py-44 overflow-hidden"
+      className="relative bg-white py-12 md:py-14 lg:py-16 overflow-hidden"
     >
       {/* ====================== */}
       {/* CLEAN BACKGROUND */}
@@ -429,32 +429,7 @@ const CTASection = () => {
           ))}
         </div>
 
-        {/* ====================== */}
-        {/* BOTTOM BAR - CLEAN */}
-        {/* ====================== */}
-        <div className="flex flex-wrap items-center justify-between gap-6 mt-16 pt-8 border-t border-blue-100/50">
-          <div className="flex items-center gap-4">
-            <span className="text-xs font-mono text-blue-500">
-              © 2026 Legacy Engineering
-            </span>
-            <span className="text-slate-300">•</span>
-            <span className="text-xs text-slate-400">
-              v2.4.1
-            </span>
-          </div>
 
-          <div className="flex items-center gap-6">
-            <a href="/process" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">
-              Process
-            </a>
-            <a href="/ethics" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">
-              Ethics
-            </a>
-            <a href="/contact" className="text-xs text-slate-500 hover:text-blue-600 transition-colors">
-              Contact
-            </a>
-          </div>
-        </div>
       </div>
     </section>
   );

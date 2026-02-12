@@ -16,22 +16,22 @@ const createServiceIcon = (IconComponent: any) => ({ isHovered = false }: { isHo
 
 const services = [
   {
-    title: "Residential Roofing",
+    title: "ROOF REPAIRS",
     description: "Premium roofing solutions for modern homes",
     Icon: createServiceIcon(Home),
     items: ["Asphalt Shingles", "Metal Roofing", "Tile Roofing", "Flat Roof Systems", "Roof Replacement"],
     features: ["25-Year Warranty", "Energy Efficient", "Storm Resistant"]
   },
   {
-    title: "Commercial Roofing",
-    description: "Industrial-grade commercial systems",
+    title: "ROOF REPLACEMENT",
+    description: "When roofing systems get damaged or too old, they sometimes need to be completely replaced",
     Icon: createServiceIcon(Building2),
     items: ["EPDM Roofing", "TPO Systems", "PVC Membranes", "Built-Up Roofing", "Green Roofs"],
     features: ["30-Year Warranty", "Energy Star Rated", "Low Maintenance"]
   },
   {
-    title: "Specialty Services",
-    description: "Advanced roofing solutions",
+    title: "ROOF MAINTENANCE",
+    description: "Biannual and quarterly inspection and maintenance programs for residential and commercial roofing systems.",
     Icon: createServiceIcon(Wrench),
     items: ["Roof Inspections", "Emergency Repairs", "Gutter Systems", "Solar Integration", "Waterproofing"],
     features: ["24/7 Service", "Same-Day Quotes", "Free Inspections"]
@@ -359,10 +359,10 @@ const Navbar = () => {
               whileTap={{ scale: 0.98 }}
             >
               <a
-                href="#quote"
+                href="#contact"
                 onClick={handleLinkClick}
                 onMouseEnter={() => setActiveMegaMenu(null)}
-                className="group relative bg-white text-blue-700 px-7 py-3.5 rounded-xl font-semibold border border-blue-200 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-200/50 transition-all duration-300"
+                className="group relative bg-white text-blu Ge-700 px-7 py-3.5 rounded-xl font-semibold border border-blue-200 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-200/50 transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center space-x-2">
                   <Calendar className="h-4 w-4 text-blue-600" />

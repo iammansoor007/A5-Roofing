@@ -288,10 +288,7 @@ const ServiceCard = ({ service, index }) => {
               <span className="w-1 h-1 bg-blue-500 rounded-full" />
               <span>Certified installers</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="w-1 h-1 bg-blue-500 rounded-full" />
-              <span>25-year warranty</span>
-            </div>
+
           </motion.div>
         </div>
 
@@ -333,81 +330,73 @@ const Services = () => {
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
 
-  // Scroll animations - SLOWER REVEAL
+  // Scroll animations - ULTRA FAST REVEAL (completes in first 10-15% of scroll)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 25,
+    stiffness: 350,  // Very responsive
+    damping: 28,
     restDelta: 0.001
   });
 
-  // LEFT TO RIGHT IMAGE REVEAL - SLOWER (0 to 0.6)
-  // LEFT TO RIGHT IMAGE REVEAL - FAST
+  // LEFT TO RIGHT IMAGE REVEAL - DONE BY 10% SCROLL
   const clipPathLeftToRight = useTransform(
     smoothProgress,
-    [0, 0.3],  // Complete by 30% scroll
+    [0, 0.1],
     ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"]
   );
 
-  // BOTTOM IMAGE REVEAL - FAST
+  // BOTTOM IMAGE REVEAL - DONE BY 15% SCROLL
   const bottomClipPath = useTransform(
     smoothProgress,
-    [0.1, 0.4],  // Start at 10%, complete by 40% scroll
+    [0.05, 0.15],
     ["inset(0% 100% 0% 0%)", "inset(0% 0% 0% 0%)"]
   );
 
-  const imageScale = useTransform(smoothProgress, [0, 0.6], [1.15, 1]);
-  const overlayOpacity = useTransform(smoothProgress, [0, 0.4], [0.5, 0.1]);
+  const imageScale = useTransform(smoothProgress, [0, 0.1], [1.15, 1]);
+  const overlayOpacity = useTransform(smoothProgress, [0, 0.08], [0.5, 0.1]);
 
-  const bottomImageScale = useTransform(smoothProgress, [0.2, 0.8], [1.2, 1]);
-  const bottomOverlayOpacity = useTransform(smoothProgress, [0.2, 0.6], [0, 0.95]);
+  const bottomImageScale = useTransform(smoothProgress, [0.05, 0.15], [1.2, 1]);
+  const bottomOverlayOpacity = useTransform(smoothProgress, [0.05, 0.12], [0, 0.95]);
 
   const services = [
     {
       number: "01",
-      title: "Residential Roofing",
-      description: "Custom-engineered residential roof systems. From slate to standing seam, built for lasting beauty.",
+      title: "Roof Repair Services",
+      description: "Our professional roof repair services are designed to find the true source of the problem, not just the visible symptoms. By restoring your roof’s strength, stability, and protective barrier, we help prevent further deterioration and protect the comfort, safety, and value of your home or business for the long term.",
       icon: "⌗",
       tag: "Heritage"
     },
     {
       number: "02",
-      title: "Commercial Systems",
-      description: "Large-scale commercial roofing solutions with TPO, EPDM, and modified bitumen systems.",
+      title: "Roof Replacement",
+      description: "When a roof becomes too old or severely damaged, replacement becomes the safest and most reliable long-term investment for protecting your property.  ",
       icon: "⎔",
       tag: "Industrial"
     },
     {
       number: "03",
-      title: "Roof Restoration",
-      description: "Comprehensive restoration programs that extend roof lifecycle by decades.",
+      title: "Roof Inspections and Preventive Maintenance",
+      description: "Comprehensive restoration programs that extend roof lifecycle by decades. Hidden wear can often go unnoticed.",
       icon: "↻",
       tag: "Sustainable"
     },
     {
       number: "04",
-      title: "Emergency Repair",
-      description: "24/7 rapid-response structural repair with same-day assessment.",
+      title: "Residential Roofing Services",
+      description: "A well-built roofing system protects your family, preserves interior comfort, and maintains the long-term value and stability of your property..",
       icon: "⚡",
-      tag: "Rapid"
+      tag: "Safety"
     },
     {
       number: "05",
-      title: "Preventive Maintenance",
-      description: "Data-driven inspection and maintenance programs that prevent failures.",
+      title: "Commercial Roofing Solutions",
+      description: "Commercial roofing systems play a critical role in protecting daily business operations, employees, equipment, and valuable inventory",
       icon: "◈",
-      tag: "Predictive"
-    },
-    {
-      number: "06",
-      title: "Architectural Metal",
-      description: "Bespoke architectural metalwork and copper roofing for landmark properties.",
-      icon: "⌖",
-      tag: "Bespoke"
+      tag: "Commercial"
     }
   ];
 
@@ -484,9 +473,9 @@ const Services = () => {
               {/* Headline - Slower reveal */}
               <div className="overflow-hidden mb-4">
                 <h2 className="split-text text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight">
-                  WHAT WE<br />
+                  Our Roofing <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">
-                    ENGINEER
+                    Services
                   </span>
                 </h2>
               </div>
@@ -494,8 +483,7 @@ const Services = () => {
               {/* Description */}
               <div className="overflow-hidden mt-2">
                 <p className="text-slate-600 text-lg leading-relaxed">
-                  From residential masterpieces to commercial-grade systems,
-                  every roof is precision-engineered for endurance and designed for distinction.
+                  Our professional roof repair services are designed to find the true source of the problem, not just the visible symptoms. By restoring your roof’s strength, stability, and protective barrier, we help prevent further deterioration and protect the comfort, safety, and value of your home or business for the long term.
                 </p>
               </div>
 
@@ -503,7 +491,7 @@ const Services = () => {
               <div className="flex items-center gap-8 mt-8 pt-6 border-t border-blue-200">
                 <div>
                   <div className="text-3xl md:text-4xl font-bold text-blue-700">
-                    <Counter value={2847} />
+                    <Counter value={500} suffix="+" />
                   </div>
                   <div className="text-xs font-semibold tracking-wider uppercase text-blue-500 mt-1">
                     Projects
@@ -598,85 +586,7 @@ const Services = () => {
           </div>
         </div>
 
-        {/* ====================== */}
-        {/* BOTTOM SECTION - SLOW LEFT TO RIGHT IMAGE REVEAL */}
-        {/* ====================== */}
-        <div className="relative h-[480px] lg:h-[440px] rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/20">
-          {/* Image with Slow Left to Right Reveal */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ clipPath: bottomClipPath }}
-          >
-            <motion.img
-              src={aboutImage}
-              alt="Roofing craftsmanship"
-              className="w-full h-full object-cover"
-              style={{ scale: bottomImageScale }}
-            />
-          </motion.div>
 
-          {/* Blue Gradient Overlay */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/80 to-blue-700/40"
-            style={{ opacity: bottomOverlayOpacity }}
-          />
-
-          {/* Content */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="px-8 md:px-16 max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-              >
-                <span className="text-xs font-mono tracking-wider uppercase text-blue-200 mb-3 block flex items-center gap-2">
-                  <span className="w-6 h-px bg-blue-300" />
-                  Since 2007
-                </span>
-
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 leading-tight">
-                  Craftsmanship Meets<br />Engineering Excellence
-                </h3>
-
-                <p className="text-blue-100 text-lg mb-8 max-w-lg">
-                  Every project receives the full measure of our expertise —
-                  17 years of precision, innovation, and uncompromising quality.
-                </p>
-
-                {/* Premium Button */}
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="group relative px-8 py-4 bg-white text-blue-800 text-xs tracking-wider uppercase font-semibold rounded-full overflow-hidden shadow-xl"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Inquire About Your Project
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ repeat: Infinity, duration: 1.5, repeatDelay: 1 }}
-                      className="text-lg"
-                    >
-                      →
-                    </motion.span>
-                  </span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-100 to-white"
-                    initial={{ x: '-100%' }}
-                    whileHover={{ x: 0 }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </motion.button>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Corner accents */}
-          <div className="absolute top-6 left-6 w-12 h-[2px] bg-white/40" />
-          <div className="absolute top-6 left-6 w-[2px] h-12 bg-white/40" />
-          <div className="absolute bottom-6 right-6 w-12 h-[2px] bg-white/40" />
-          <div className="absolute bottom-6 right-6 w-[2px] h-12 bg-white/40" />
-        </div>
       </div>
 
       {/* Subtle bottom wave */}
