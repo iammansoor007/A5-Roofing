@@ -106,9 +106,7 @@ const Ready = ({ onComplete }: { onComplete: () => void }) => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      <span className="text-3xl md:text-4xl font-light text-white">
-        Ready.
-      </span>
+
     </motion.div>
   );
 };

@@ -22,7 +22,7 @@ const Images = {
 };
 
 // ======================
-// PREMIUM SVG ICONS
+// PREMIUM SVG ICONS - REDESIGNED
 // ======================
 const Icons = {
   User: () => (
@@ -74,6 +74,23 @@ const Icons = {
       <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
+  Identity: () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M5 20v-2a7 7 0 0 1 14 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  Specification: () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  Transmission: () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M22 2L15 9M22 2l-7 14-4-4-4 4-4-4L2 19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
 };
 
 // ======================
@@ -101,7 +118,7 @@ const LiquidParallax = ({ children, speed = 0.1, className = "" }) => {
 };
 
 // ======================
-// HOLOGRAPHIC INPUT FIELD
+// HOLOGRAPHIC INPUT FIELD - REDESIGNED
 // ======================
 const HolographicInput = ({ icon: Icon, label, type = "text", options = [], ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -128,18 +145,18 @@ const HolographicInput = ({ icon: Icon, label, type = "text", options = [], ...p
       />
 
       <div className={`
-                relative flex items-center bg-white/95 backdrop-blur-sm rounded-xl border transition-all duration-500
-                ${isFocused
+        relative flex items-center bg-white/95 backdrop-blur-sm rounded-xl border transition-all duration-500
+        ${isFocused
           ? 'border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.15)]'
           : hasValue
             ? 'border-blue-400/30'
             : 'border-slate-200/80 hover:border-slate-300/80'
         }
-            `}>
+      `}>
         <div className={`
-                    absolute left-4 transition-all duration-500
-                    ${isFocused ? 'text-blue-600 scale-110' : hasValue ? 'text-blue-500' : 'text-slate-400 group-hover:text-slate-500'}
-                `}>
+          absolute left-4 transition-all duration-500
+          ${isFocused ? 'text-blue-600 scale-110' : hasValue ? 'text-blue-500' : 'text-slate-400 group-hover:text-slate-500'}
+        `}>
           <Icon />
         </div>
 
@@ -191,7 +208,7 @@ const HolographicInput = ({ icon: Icon, label, type = "text", options = [], ...p
 };
 
 // ======================
-// QUANTUM TEXTAREA
+// QUANTUM TEXTAREA - REDESIGNED
 // ======================
 const QuantumTextarea = ({ icon: Icon, label, ...props }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -217,18 +234,18 @@ const QuantumTextarea = ({ icon: Icon, label, ...props }) => {
       />
 
       <div className={`
-                relative flex bg-white/95 backdrop-blur-sm rounded-xl border transition-all duration-500
-                ${isFocused
+        relative flex bg-white/95 backdrop-blur-sm rounded-xl border transition-all duration-500
+        ${isFocused
           ? 'border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.15)]'
           : hasValue
             ? 'border-blue-400/30'
             : 'border-slate-200/80 hover:border-slate-300/80'
         }
-            `}>
+      `}>
         <div className={`
-                    absolute left-4 top-4 transition-all duration-500
-                    ${isFocused ? 'text-blue-600 scale-110' : hasValue ? 'text-blue-500' : 'text-slate-400'}
-                `}>
+          absolute left-4 top-4 transition-all duration-500
+          ${isFocused ? 'text-blue-600 scale-110' : hasValue ? 'text-blue-500' : 'text-slate-400'}
+        `}>
           <Icon />
         </div>
 
@@ -250,7 +267,7 @@ const QuantumTextarea = ({ icon: Icon, label, ...props }) => {
 };
 
 // ======================
-// CRYSTAL SERVICE CARD
+// CRYSTAL SERVICE CARD - REDESIGNED
 // ======================
 const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -263,12 +280,12 @@ const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
       onHoverEnd={() => setIsHovered(false)}
       onClick={onClick}
       className={`
-                relative p-6 rounded-2xl cursor-pointer transition-all duration-700
-                ${isSelected
+        relative p-5 sm:p-6 rounded-2xl cursor-pointer transition-all duration-700
+        ${isSelected
           ? 'bg-gradient-to-br from-blue-50 via-white to-blue-50/50 shadow-2xl'
           : 'bg-white/80 backdrop-blur-sm hover:bg-white'
         }
-            `}
+      `}
       style={{
         boxShadow: isSelected
           ? '0 20px 40px -15px rgba(37,99,235,0.2), inset 0 0 0 1px rgba(37,99,235,0.3)'
@@ -293,21 +310,21 @@ const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
           } : {}}
           transition={{ duration: 0.5 }}
           className={`
-                        text-3xl mb-4 transition-colors duration-500
-                        ${isSelected ? 'text-blue-700' : 'text-blue-600/70 group-hover:text-blue-700'}
-                    `}
+            text-2xl sm:text-3xl mb-3 sm:mb-4 transition-colors duration-500
+            ${isSelected ? 'text-blue-700' : 'text-blue-600/70 group-hover:text-blue-700'}
+          `}
         >
           {icon}
         </motion.div>
       </div>
 
       <h4 className={`
-                text-base font-medium mb-2 transition-colors duration-500
-                ${isSelected ? 'text-slate-900' : 'text-slate-800'}
-            `}>
+        text-sm sm:text-base font-medium mb-1 sm:mb-2 transition-colors duration-500
+        ${isSelected ? 'text-slate-900' : 'text-slate-800'}
+      `}>
         {title}
       </h4>
-      <p className="text-xs text-slate-500 leading-relaxed">
+      <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed">
         {desc}
       </p>
 
@@ -316,9 +333,9 @@ const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          className="absolute top-4 right-4"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4"
         >
-          <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center shadow-lg shadow-blue-600/30">
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center shadow-lg shadow-blue-600/30">
             <Icons.Check />
           </div>
         </motion.div>
@@ -326,8 +343,8 @@ const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
 
       {isSelected && (
         <>
-          <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-blue-400/30 rounded-tl-2xl" />
-          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-blue-400/30 rounded-br-2xl" />
+          <div className="absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-l-2 border-blue-400/30 rounded-tl-2xl" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-r-2 border-blue-400/30 rounded-br-2xl" />
         </>
       )}
     </motion.div>
@@ -335,7 +352,87 @@ const CrystalServiceCard = ({ title, desc, icon, isSelected, onClick }) => {
 };
 
 // ======================
-// SUCCESS MODAL
+// STAGE INDICATOR - FULLY RESPONSIVE & PREMIUM
+// ======================
+const StageIndicator = ({ currentStep }) => {
+  const stages = [
+    { number: 1, name: "Identity", icon: Icons.Identity, desc: "Your details" },
+    { number: 2, name: "Specification", icon: Icons.Specification, desc: "Project scope" },
+    { number: 3, name: "Transmission", icon: Icons.Transmission, desc: "Final review" },
+  ];
+
+  return (
+    <div className="relative mb-12 sm:mb-16">
+      {/* Background line - hidden on smallest screens */}
+      <div className="absolute top-4 sm:top-6 left-0 right-0 h-[2px] bg-slate-200 hidden sm:block" />
+
+      {/* Animated progress line */}
+      <motion.div
+        className="absolute top-4 sm:top-6 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-blue-700 hidden sm:block"
+        initial={{ width: "0%" }}
+        animate={{ width: `${((currentStep - 1) / 2) * 100}%` }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      />
+
+      {/* Stage indicators */}
+      <div className="relative flex items-start justify-between">
+        {stages.map((stage) => (
+          <div key={stage.number} className="flex flex-col items-center flex-1">
+            {/* Icon container */}
+            <motion.div
+              animate={currentStep >= stage.number ? {
+                scale: 1.1,
+                backgroundColor: "#2563eb",
+                borderColor: "#2563eb",
+              } : {
+                scale: 1,
+                backgroundColor: "white",
+                borderColor: "#e2e8f0",
+              }}
+              className={`
+                relative w-10 h-10 sm:w-14 sm:h-14 rounded-full border-2 
+                flex items-center justify-center mb-2 sm:mb-3
+                ${currentStep >= stage.number ? 'bg-blue-600 border-blue-600' : 'bg-white border-slate-200'}
+                shadow-md transition-all duration-300
+              `}
+            >
+              {currentStep > stage.number ? (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring" }}
+                >
+                  <Icons.Check />
+                </motion.div>
+              ) : (
+                <div className={`${currentStep >= stage.number ? 'text-white' : 'text-slate-400'}`}>
+                  <stage.icon />
+                </div>
+              )}
+            </motion.div>
+
+            {/* Stage name - responsive */}
+            <span className={`
+              text-[10px] sm:text-xs font-semibold tracking-wider text-center
+              ${currentStep >= stage.number ? 'text-blue-600' : 'text-slate-400'}
+            `}>
+              <span className="hidden xs:inline">{stage.name}</span>
+              <span className="xs:hidden">{stage.number}</span>
+            </span>
+
+            {/* Stage description - hidden on mobile */}
+            <span className="text-[8px] sm:text-[10px] text-slate-400 mt-0.5 sm:mt-1 hidden sm:block">
+              {stage.desc}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ======================
+// SUCCESS MODAL - PREMIUM
 // ======================
 const SuccessModal = ({ isOpen, onClose }) => {
   useEffect(() => {
@@ -356,7 +453,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-6"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -375,11 +472,11 @@ const SuccessModal = ({ isOpen, onClose }) => {
               stiffness: 400,
               damping: 30
             }}
-            className="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
+            className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50/50" />
 
-            <div className="relative pt-12 pb-8 px-8 text-center">
+            <div className="relative pt-10 sm:pt-12 pb-6 sm:pb-8 px-6 sm:px-8 text-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -389,7 +486,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
                   damping: 30,
                   delay: 0.2
                 }}
-                className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center shadow-2xl shadow-blue-600/30"
+                className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center shadow-2xl shadow-blue-600/30"
               >
                 <motion.div
                   initial={{ pathLength: 0 }}
@@ -404,7 +501,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="text-2xl font-light text-slate-900 mb-3"
+                className="text-xl sm:text-2xl font-light text-slate-900 mb-2 sm:mb-3"
               >
                 Request Received
               </motion.h3>
@@ -413,9 +510,9 @@ const SuccessModal = ({ isOpen, onClose }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="text-slate-500 text-sm leading-relaxed"
+                className="text-slate-500 text-xs sm:text-sm leading-relaxed"
               >
-                Your legacy project inquiry has been transmitted to our engineering team.
+                Your project inquiry has been transmitted to our engineering team.
                 <br />
                 <span className="font-medium text-blue-600 mt-2 block">
                   We'll respond within 4-8 hours.
@@ -427,7 +524,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
                 onClick={onClose}
-                className="mt-8 px-8 py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-xs font-medium tracking-[0.2em] uppercase rounded-full shadow-lg hover:shadow-xl transition-all duration-500"
+                className="mt-6 sm:mt-8 px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-xs font-medium tracking-[0.2em] uppercase rounded-full shadow-lg hover:shadow-xl transition-all duration-500"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -435,8 +532,8 @@ const SuccessModal = ({ isOpen, onClose }) => {
               </motion.button>
             </div>
 
-            <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-blue-200/50" />
-            <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-blue-200/50" />
+            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-l-2 border-blue-200/50" />
+            <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-r-2 border-blue-200/50" />
           </motion.div>
         </motion.div>
       )}
@@ -445,7 +542,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
 };
 
 // ======================
-// MAIN GET QUOTE SECTION - FIXED EMAIL SUBMISSION
+// MAIN GET QUOTE SECTION - AWARD WINNING
 // ======================
 const GetQuote = () => {
   const sectionRef = useRef(null);
@@ -511,25 +608,20 @@ const GetQuote = () => {
       .map(id => services.find(s => s.id === id)?.title)
       .join(', ');
 
-    // Create email content
     const emailContent = `
-            Name: ${formData.name}
-            Email: ${formData.email}
-            Phone: ${formData.phone}
-            Company: ${formData.company}
-            Project Type: ${projectTypes.find(t => t.value === formData.projectType)?.label || 'Not specified'}
-            Timeline: ${timelines.find(t => t.value === formData.timeline)?.label || 'Not specified'}
-            Selected Services: ${serviceNames || 'None selected'}
-            
-            Message:
-            ${formData.message}
-        `;
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Phone: ${formData.phone}
+      Company: ${formData.company}
+      Project Type: ${projectTypes.find(t => t.value === formData.projectType)?.label || 'Not specified'}
+      Timeline: ${timelines.find(t => t.value === formData.timeline)?.label || 'Not specified'}
+      Selected Services: ${serviceNames || 'None selected'}
+      Message: ${formData.message}
+    `;
 
     try {
-      // Method 1: mailto fallback - opens default email client
       const mailtoLink = `mailto:ammansoor007@gmail.com?subject=🔷 A5 Roofing Quote Request - ${formData.name}&body=${encodeURIComponent(emailContent)}`;
 
-      // Try FormSubmit first, if it fails, open mailto
       try {
         const response = await fetch('https://formsubmit.co/ajax/ammansoor007@gmail.com', {
           method: 'POST',
@@ -554,7 +646,6 @@ const GetQuote = () => {
 
         if (response.ok) {
           setShowSuccess(true);
-          // Reset form
           setFormStep(1);
           setSelectedServices([]);
           setFormData({
@@ -573,11 +664,8 @@ const GetQuote = () => {
         console.log('FormSubmit failed, using mailto fallback');
       }
 
-      // Fallback: open mailto
       window.location.href = mailtoLink;
       setShowSuccess(true);
-
-      // Reset form
       setFormStep(1);
       setSelectedServices([]);
       setFormData({
@@ -592,7 +680,6 @@ const GetQuote = () => {
 
     } catch (error) {
       console.error('Submission error:', error);
-      // Final fallback - alert user
       alert('Please email us directly at ammansoor007@gmail.com with your project details.');
     } finally {
       setIsSubmitting(false);
@@ -633,35 +720,37 @@ const GetQuote = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white py-10 md:py-12 lg:py-14 overflow-hidden"
+      className="relative bg-white py-12 sm:py-14 md:py-16 lg:py-16 overflow-hidden"
     >
       {/* ====================== */}
-      {/* QUANTUM BACKGROUND */}
+      {/* PREMIUM BACKGROUND */}
       {/* ====================== */}
 
+      {/* Subtle grid */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `
-                            linear-gradient(to right, #2563eb 1px, transparent 1px),
-                            linear-gradient(to bottom, #2563eb 1px, transparent 1px)
-                        `,
+              linear-gradient(to right, #2563eb 1px, transparent 1px),
+              linear-gradient(to bottom, #2563eb 1px, transparent 1px)
+            `,
             backgroundSize: '60px 60px',
           }}
         />
       </div>
 
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-blue-50/40 to-transparent opacity-60 blur-3xl" />
+      {/* Ambient light */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] sm:w-[1000px] h-[400px] sm:h-[500px] bg-gradient-to-b from-blue-50/40 to-transparent opacity-60 blur-3xl" />
 
+      {/* Parallax layers */}
       <LiquidParallax speed={0.05} className="z-0">
         <div className="absolute top-20 right-0 w-2/5 h-3/5">
           <img
             src={Images.Form}
-            alt="Architectural form"
+            alt=""
             className="w-full h-full object-cover opacity-[0.03]"
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-white via-white to-transparent" />
         </div>
       </LiquidParallax>
 
@@ -669,15 +758,15 @@ const GetQuote = () => {
         <div className="absolute bottom-0 left-0 w-1/3 h-1/2">
           <img
             src={Images.Abstract}
-            alt="Abstract architecture"
+            alt=""
             className="w-full h-full object-cover opacity-[0.03]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white to-transparent" />
         </div>
       </LiquidParallax>
 
+      {/* Particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-0.5 h-0.5 bg-blue-400/20 rounded-full"
@@ -687,9 +776,7 @@ const GetQuote = () => {
             }}
             animate={{
               y: [0, -40, 0, 40, 0],
-              x: [0, 20, -20, 10, 0],
               opacity: [0, 0.2, 0],
-              scale: [0, 1.5, 0],
             }}
             transition={{
               duration: 8 + Math.random() * 6,
@@ -704,29 +791,29 @@ const GetQuote = () => {
       {/* ====================== */}
       {/* MAIN CONTENT */}
       {/* ====================== */}
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-30">
 
         {/* ====================== */}
-        {/* SECTION HEADER */}
+        {/* SECTION HEADER - RESPONSIVE */}
         {/* ====================== */}
-        <div className="max-w-3xl mx-auto text-center mb-20 quote-cinematic">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-            <span className="text-xs font-mono tracking-[0.3em] uppercase text-blue-600/80">
-              [ INITIATE PROTOCOL ]
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16 md:mb-20 quote-cinematic">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 sm:w-12 h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+            <span className="text-[10px] sm:text-xs font-mono tracking-[0.2em] sm:tracking-[0.3em] uppercase text-blue-600/80">
+              INITIATE PROTOCOL
             </span>
-            <div className="w-12 h-[2px] bg-gradient-to-r from-blue-500 via-blue-500 to-transparent" />
+            <div className="w-8 sm:w-12 h-[2px] bg-gradient-to-r from-blue-500 via-blue-500 to-transparent" />
           </div>
 
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-6 leading-tight tracking-tight">
-            Request<br />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-slate-900 mb-4 sm:mb-6 leading-tight">
+            Request Your<br />
             <span className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900">
-              precision quote
+              Precision Quote
             </span>
           </h2>
 
-          <p className="text-slate-500 text-lg md:text-xl font-light max-w-2xl mx-auto">
-            Every legacy begins with a conversation. Transmit your vision—our engineering collective will respond within hours.
+          <p className="text-sm sm:text-base md:text-lg text-slate-500 font-light max-w-2xl mx-auto px-4">
+            Every legacy begins with a conversation. Share your vision — our engineering collective will respond within hours.
           </p>
         </div>
 
@@ -740,8 +827,9 @@ const GetQuote = () => {
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative max-w-5xl mx-auto"
         >
-          <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl border border-blue-200/30 shadow-2xl overflow-hidden">
+          <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-blue-200/30 shadow-2xl overflow-hidden">
 
+            {/* Animated border */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               <motion.rect
                 x="2"
@@ -751,7 +839,7 @@ const GetQuote = () => {
                 fill="none"
                 stroke="url(#formGradient)"
                 strokeWidth="1.2"
-                strokeDasharray="10 10"
+                strokeDasharray="8 8"
                 initial={{ pathLength: 0, opacity: 0 }}
                 whileInView={{ pathLength: 1, opacity: 0.6 }}
                 viewport={{ once: true }}
@@ -765,63 +853,12 @@ const GetQuote = () => {
               </defs>
             </svg>
 
-            <div className="relative p-8 md:p-12 lg:p-16">
+            <div className="relative p-5 sm:p-8 md:p-10 lg:p-12">
 
-              {/* Progress Indicator */}
-              <div className="relative mb-16">
-                <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-slate-200 -translate-y-1/2" />
-                <motion.div
-                  className="absolute top-1/2 left-0 h-[2px] bg-gradient-to-r from-blue-500 to-blue-700 -translate-y-1/2"
-                  initial={{ width: "0%" }}
-                  animate={{ width: `${((formStep - 1) / 2) * 100}%` }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                />
+              {/* ✅ RESPONSIVE STAGE INDICATOR */}
+              <StageIndicator currentStep={formStep} />
 
-                <div className="relative flex items-center justify-between">
-                  {[1, 2, 3].map((step) => (
-                    <div key={step} className="flex flex-col items-center">
-                      <motion.div
-                        animate={formStep >= step ? {
-                          scale: 1.1,
-                          backgroundColor: "#2563eb",
-                          borderColor: "#2563eb",
-                        } : {
-                          scale: 1,
-                          backgroundColor: "white",
-                          borderColor: "#e2e8f0",
-                        }}
-                        className={`
-                                                    relative w-12 h-12 rounded-full border-2 flex items-center justify-center
-                                                    ${formStep >= step ? 'bg-blue-600 border-blue-600' : 'bg-white border-slate-200'}
-                                                `}
-                        transition={{ duration: 0.3 }}
-                      >
-                        {formStep > step ? (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ type: "spring" }}
-                          >
-                            <Icons.Check />
-                          </motion.div>
-                        ) : (
-                          <span className={formStep >= step ? 'text-white' : 'text-slate-400'}>
-                            {step}
-                          </span>
-                        )}
-                      </motion.div>
-                      <span className={`
-                                                text-xs mt-3 font-mono tracking-wider
-                                                ${formStep >= step ? 'text-blue-600' : 'text-slate-400'}
-                                            `}>
-                        {step === 1 ? 'IDENTITY' : step === 2 ? 'SPECIFICATION' : 'TRANSMISSION'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-10">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                 {/* Step 1: Identity */}
                 <AnimatePresence mode="wait">
                   {formStep === 1 && (
@@ -831,9 +868,9 @@ const GetQuote = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -30 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-6"
+                      className="space-y-4 sm:space-y-6"
                     >
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <HolographicInput
                           icon={Icons.User}
                           label="Full name"
@@ -853,7 +890,7 @@ const GetQuote = () => {
                         />
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <HolographicInput
                           icon={Icons.Phone}
                           type="tel"
@@ -881,13 +918,13 @@ const GetQuote = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -30 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-10"
+                      className="space-y-6 sm:space-y-8"
                     >
                       <div>
-                        <label className="block text-xs font-mono tracking-[0.2em] uppercase text-slate-500 mb-6">
+                        <label className="block text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-slate-500 mb-4 sm:mb-6">
                           Select Engineering Services
                         </label>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                           {services.map((service) => (
                             <CrystalServiceCard
                               key={service.id}
@@ -899,7 +936,7 @@ const GetQuote = () => {
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         <HolographicInput
                           icon={Icons.Building}
                           type="select"
@@ -930,7 +967,7 @@ const GetQuote = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -30 }}
                       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="space-y-8"
+                      className="space-y-6 sm:space-y-8"
                     >
                       <QuantumTextarea
                         icon={Icons.Mail}
@@ -945,36 +982,35 @@ const GetQuote = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="relative p-6 bg-gradient-to-br from-blue-50/50 via-white to-blue-50/30 rounded-xl border border-blue-200/50"
+                        className="relative p-4 sm:p-6 bg-gradient-to-br from-blue-50/50 via-white to-blue-50/30 rounded-xl border border-blue-200/50"
                       >
-                        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(37,99,235,0.05)_0%,_transparent_70%)]" />
                         <div className="relative z-10">
-                          <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-blue-700 mb-4 flex items-center gap-2">
+                          <h4 className="text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-blue-700 mb-3 sm:mb-4 flex items-center gap-2">
                             <Icons.Sparkle />
                             TRANSMISSION SUMMARY
                           </h4>
-                          <div className="grid grid-cols-2 gap-4 text-sm">
+                          <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                             <div>
-                              <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">Services</p>
-                              <p className="font-medium text-slate-900">
-                                {selectedServices.length} of {services.length} selected
+                              <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-400 mb-1">Services</p>
+                              <p className="font-medium text-slate-900 text-xs sm:text-sm">
+                                {selectedServices.length} of {services.length}
                               </p>
                             </div>
                             <div>
-                              <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">Classification</p>
-                              <p className="font-medium text-slate-900">
-                                {formData.projectType ? projectTypes.find(t => t.value === formData.projectType)?.label : 'Not specified'}
+                              <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-400 mb-1">Classification</p>
+                              <p className="font-medium text-slate-900 text-xs sm:text-sm truncate">
+                                {formData.projectType ? projectTypes.find(t => t.value === formData.projectType)?.label : '—'}
                               </p>
                             </div>
                             <div>
-                              <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">Timeline</p>
-                              <p className="font-medium text-slate-900">
-                                {formData.timeline ? timelines.find(t => t.value === formData.timeline)?.label : 'Not specified'}
+                              <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-400 mb-1">Timeline</p>
+                              <p className="font-medium text-slate-900 text-xs sm:text-sm truncate">
+                                {formData.timeline ? timelines.find(t => t.value === formData.timeline)?.label : '—'}
                               </p>
                             </div>
                             <div>
-                              <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-1">Response</p>
-                              <p className="font-medium text-blue-700">4-8 hours</p>
+                              <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-400 mb-1">Response</p>
+                              <p className="font-medium text-blue-700 text-xs sm:text-sm">4-8 hours</p>
                             </div>
                           </div>
                         </div>
@@ -983,24 +1019,24 @@ const GetQuote = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Navigation Controls */}
-                <div className="flex items-center justify-between pt-8 border-t border-blue-200/30">
+                {/* Navigation Controls - Responsive */}
+                <div className="flex items-center justify-between pt-4 sm:pt-6 border-t border-blue-200/30">
                   <motion.button
                     type="button"
                     onClick={() => setFormStep(Math.max(1, formStep - 1))}
                     className={`
-                                            relative px-6 py-3 text-sm font-medium rounded-full transition-all duration-500 overflow-hidden group
-                                            ${formStep === 1
+                      relative px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-full transition-all duration-500
+                      ${formStep === 1
                         ? 'opacity-0 pointer-events-none'
                         : 'text-slate-600 hover:text-slate-900'
                       }
-                                        `}
+                    `}
                     whileHover={{ x: -3 }}
                     whileTap={{ scale: 0.98 }}
                     disabled={formStep === 1}
                   >
-                    <span className="relative z-10 flex items-center gap-2">
-                      ← Previous
+                    <span className="flex items-center gap-1 sm:gap-2">
+                      ← <span className="hidden xs:inline">Previous</span>
                     </span>
                   </motion.button>
 
@@ -1008,11 +1044,11 @@ const GetQuote = () => {
                     <motion.button
                       type="button"
                       onClick={() => setFormStep(formStep + 1)}
-                      className="relative px-8 py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-sm font-medium rounded-full shadow-lg overflow-hidden group"
+                      className="relative px-5 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-xs sm:text-sm font-medium rounded-full shadow-lg overflow-hidden group"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span className="relative z-10 flex items-center gap-3">
+                      <span className="relative z-10 flex items-center gap-1 sm:gap-2">
                         Continue
                         <Icons.ArrowRight />
                       </span>
@@ -1027,23 +1063,24 @@ const GetQuote = () => {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      className="relative px-10 py-4 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-sm font-medium rounded-full shadow-2xl overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="relative px-6 sm:px-10 py-2.5 sm:py-4 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-xs sm:text-sm font-medium rounded-full shadow-2xl overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
                       whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                       whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     >
-                      <span className="relative z-10 flex items-center gap-3">
+                      <span className="relative z-10 flex items-center gap-1 sm:gap-2">
                         {isSubmitting ? (
                           <>
                             <motion.div
                               animate={{ rotate: 360 }}
                               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                              className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
                             />
-                            Transmitting...
+                            <span className="hidden xs:inline">Transmitting...</span>
                           </>
                         ) : (
                           <>
-                            Transmit Request
+                            <span className="hidden xs:inline">Transmit Request</span>
+                            <span className="xs:hidden">Send</span>
                             <Icons.Send />
                           </>
                         )}
@@ -1059,27 +1096,28 @@ const GetQuote = () => {
                 </div>
               </form>
 
-              {/* Trust Seal */}
-              <div className="flex items-center justify-center gap-6 mt-12 pt-8 border-t border-blue-200/30">
-                <div className="flex items-center gap-3">
-                  <div className="flex -space-x-3">
+              {/* Trust Seal - Responsive */}
+              <div className="flex flex-col xs:flex-row items-center justify-center gap-3 sm:gap-6 mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-blue-200/30">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
                       <motion.div
                         key={i}
                         whileHover={{ y: -3, scale: 1.1 }}
-                        className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-white flex items-center justify-center text-blue-800 text-xs font-medium shadow-lg"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-white flex items-center justify-center text-blue-800 text-[8px] sm:text-xs font-medium shadow-lg"
                       >
                         {String.fromCharCode(64 + i)}
                       </motion.div>
                     ))}
                   </div>
-                  <span className="text-xs text-slate-500">
-                    <span className="font-semibold text-slate-900">500+</span> engineering consultations
+                  <span className="text-[10px] sm:text-xs text-slate-500">
+                    <span className="font-semibold text-slate-900">500+</span> consultations
                   </span>
                 </div>
-                <div className="w-px h-6 bg-slate-200" />
-                <div className="text-xs font-mono text-blue-600">
-                  <span className="animate-pulse">●</span> Secure transmission
+                <div className="hidden xs:block w-px h-4 sm:h-6 bg-slate-200" />
+                <div className="text-[10px] sm:text-xs font-mono text-blue-600 flex items-center gap-1 sm:gap-2">
+                  <span className="animate-pulse">●</span>
+                  <span>Secure transmission</span>
                 </div>
               </div>
 
@@ -1087,21 +1125,18 @@ const GetQuote = () => {
           </div>
         </motion.div>
 
-
       </div>
 
-      {/* ====================== */}
-      {/* ENERGY WAVE */}
-      {/* ====================== */}
+      {/* Bottom wave */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none">
         <svg
-          viewBox="0 0 1440 120"
-          className="relative block w-full h-20 md:h-24"
+          viewBox="0 0 1440 100"
+          className="relative block w-full h-16 sm:h-20 md:h-24"
           preserveAspectRatio="none"
         >
           <path
             fill="url(#quantumWave)"
-            d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            d="M0,48L60,52.3C120,57,240,65,360,65.3C480,66,600,58,720,52C840,46,960,42,1080,46C1200,50,1320,58,1380,62L1440,66L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"
           />
           <defs>
             <linearGradient id="quantumWave" x1="0%" y1="0%" x2="100%" y2="0%">
