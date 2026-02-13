@@ -458,20 +458,6 @@ const WhyChooseUs = () => {
                     </p>
                 </header>
 
-                {/* ====================== */}
-                {/* STATS GRID */}
-                {/* ====================== */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 reveal">
-                    {stats.map((stat, index) => (
-                        <StatCounter
-                            key={stat.label}
-                            value={stat.value}
-                            label={stat.label}
-                            suffix={stat.suffix}
-                            delay={0.1 + index * 0.1}
-                        />
-                    ))}
-                </div>
 
                 {/* ====================== */}
                 {/* FEATURES GRID - 6 CARDS */}

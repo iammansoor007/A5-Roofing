@@ -76,6 +76,64 @@ const Icons = {
       <path d="M13.833 9.167C14.5 8.5 15.3 8 16.5 8C18.5 8 20 9.5 20 12C20 14.5 18.5 16 16.5 16C14.5 16 13 14.5 13 12C13 9.5 11.5 8 9.5 8C7.5 8 6 9.5 6 12C6 14.5 7.5 16 9.5 16C10.7 16 11.5 15.5 12.167 14.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
+  Roofing: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M3 10L12 3L21 10L18 13L12 8L6 13L3 10Z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6 13V19H18V13" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Inspection: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Repair: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M16 4L20 8L12 16H8V12L16 4Z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M4 20H20" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Replacement: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M20 12H4M12 4v16M4 8h16M4 16h16" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Residential: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M3 10L12 3L21 10L18 13L12 8L6 13L3 10Z" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 13V19H16V13" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Commercial: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <rect x="4" y="8" width="16" height="12" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 8V4H16V8" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Emergency: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 8v4M12 16h.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  Maintenance: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 8v4l2 2" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Warranty: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L15 9H22L17 14L19 21L12 17L5 21L7 14L2 9H9L12 2Z" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
+  Financing: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 12h8M12 8v8" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  ),
 };
 
 // ======================
@@ -167,12 +225,12 @@ const NewsletterForm = () => {
     <div className="relative">
       <form onSubmit={handleSubmit} className="relative">
         <div className={`
-                    relative flex items-center bg-white/5 backdrop-blur-sm rounded-full border transition-all duration-500
-                    ${isFocused
+          relative flex items-center bg-white/5 backdrop-blur-sm rounded-full border transition-all duration-500
+          ${isFocused
             ? 'border-blue-500/50 shadow-[0_0_30px_rgba(37,99,235,0.1)]'
             : 'border-white/10 hover:border-white/20'
           }
-                `}>
+        `}>
           <input
             type="email"
             placeholder="Enter your email"
@@ -215,117 +273,167 @@ const NewsletterForm = () => {
 };
 
 // ======================
-// FOOTER LINK GROUP
+// COMPREHENSIVE SERVICES SECTION
 // ======================
-const FooterLinkGroup = ({ title, links }) => {
+const ServiceLinks = () => {
+  const mainServices = [
+    { label: 'Roof Repair Services', href: '/roof-repair', icon: Icons.Repair },
+    { label: 'Roof Replacement', href: '/roof-replacement', icon: Icons.Replacement },
+    { label: 'Roof Inspections', href: '/roof-inspection', icon: Icons.Inspection },
+    { label: 'Preventive Maintenance', href: '/maintenance', icon: Icons.Maintenance },
+    { label: 'Residential Roofing', href: '/residential', icon: Icons.Residential },
+    { label: 'Commercial Roofing', href: '/commercial', icon: Icons.Commercial },
+    { label: 'Emergency Services', href: '/emergency', icon: Icons.Emergency },
+    { label: 'Storm Damage Restoration', href: '/storm-damage', icon: Icons.Repair },
+    { label: 'New Roof Installation', href: '/new-roof', icon: Icons.Roofing },
+    { label: 'Roof Ventilation', href: '/ventilation', icon: Icons.Inspection },
+  ];
+
   return (
     <div className="space-y-4">
-      <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-        {title}
+      <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 flex items-center gap-2">
+        <Icons.Sparkle />
+        Our Services
       </h4>
-      <ul className="space-y-3">
-        {links.map((link) => (
-          <li key={link.label}>
-            <motion.a
-              href={link.href}
-              whileHover={{ x: 5 }}
-              className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-all duration-300 group"
-            >
-              <span className="text-[10px] text-blue-400/50 group-hover:text-blue-400 transition-colors">
-                →
-              </span>
-              {link.label}
-            </motion.a>
-          </li>
+      <div className="grid grid-cols-1 gap-2">
+        {mainServices.map((service) => (
+          <motion.a
+            key={service.label}
+            href={service.href}
+            whileHover={{ x: 5 }}
+            className="inline-flex items-center gap-3 text-sm text-white/70 hover:text-white transition-all duration-300 group py-1"
+          >
+            <span className="text-blue-400/50 group-hover:text-blue-400 transition-colors">
+              <service.icon />
+            </span>
+            <span>{service.label}</span>
+          </motion.a>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 // ======================
-// STUDIO LOCATION
+// ROOFING MATERIALS SECTION
 // ======================
-const StudioLocation = () => {
-  const [isHovered, setIsHovered] = useState(false);
+const MaterialsSection = () => {
+  const materials = [
+    { label: 'Asphalt Shingle Roofing', href: '/asphalt-shingle' },
+    { label: 'Metal Roofing Systems', href: '/metal-roofing' },
+    { label: 'Tile Roofing', href: '/tile-roofing' },
+    { label: 'Flat Roofing Systems', href: '/flat-roofing' },
+  ];
 
   return (
-    <motion.div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden group"
-    >
-      <motion.div
-        animate={isHovered ? {
-          scale: 1.05,
-          opacity: 0.1
-        } : {
-          scale: 1,
-          opacity: 0.05
-        }}
-        className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 blur-2xl"
-      />
-
-      <div className="relative z-10">
-        <div className="flex items-start gap-4">
-          <div className="text-blue-400/80">
-            <Icons.Location />
-          </div>
-          <div>
-            <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 mb-2">
-              Principal Studio
-            </h4>
-            <p className="text-sm text-white/80 leading-relaxed mb-1">
-              200 Park Avenue
-            </p>
-            <p className="text-sm text-white/80 leading-relaxed mb-3">
-              New York, NY 10166
-            </p>
-            <a
-              href="https://maps.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-blue-400 hover:text-blue-300 transition-colors"
-            >
-              View on map
-              <Icons.ArrowRight />
-            </a>
-          </div>
-        </div>
+    <div className="space-y-3 mt-4">
+      <h5 className="text-[10px] font-mono tracking-[0.2em] uppercase text-blue-400/60">
+        Materials We Install
+      </h5>
+      <div className="space-y-2">
+        {materials.map((material) => (
+          <motion.a
+            key={material.label}
+            href={material.href}
+            whileHover={{ x: 5 }}
+            className="inline-flex items-center gap-2 text-xs text-white/50 hover:text-white/80 transition-colors"
+          >
+            <span className="text-[8px] text-blue-400/40">●</span>
+            {material.label}
+          </motion.a>
+        ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 // ======================
-// CONTACT INFO
+// CONTACT INFO WITH ADDITIONAL DETAILS
 // ======================
 const ContactInfo = () => {
   return (
-    <div className="space-y-4">
-      <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-        Contact
-      </h4>
-      <div className="space-y-3">
-        <a href="mailto:studio@a5roofing.com" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
-          <span className="text-blue-400/70 group-hover:text-blue-400">
-            <Icons.Mail />
-          </span>
-          studio@a5roofing.com
-        </a>
-        <a href="tel:+12125550170" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
-          <span className="text-blue-400/70 group-hover:text-blue-400">
-            <Icons.Phone />
-          </span>
-          +1 (212) 555-0170
-        </a>
-        <div className="flex items-center gap-3 text-sm text-white/70">
-          <span className="text-blue-400/70">
-            <Icons.Infinity />
-          </span>
-          <span>24/7 Emergency Response</span>
+    <div className="space-y-6">
+      <div className="space-y-4">
+        <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 flex items-center gap-2">
+          <Icons.Sparkle />
+          Contact Us
+        </h4>
+        <div className="space-y-4">
+          <a href="mailto:studio@a5roofing.com" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
+            <span className="text-blue-400/70 group-hover:text-blue-400">
+              <Icons.Mail />
+            </span>
+            studio@a5roofing.com
+          </a>
+          <a href="tel:+12125550170" className="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors group">
+            <span className="text-blue-400/70 group-hover:text-blue-400">
+              <Icons.Phone />
+            </span>
+            +1 (212) 555-0170
+          </a>
+          <div className="flex items-center gap-3 text-sm text-white/70">
+            <span className="text-blue-400/70">
+              <Icons.Location />
+            </span>
+            <span>Houston, Dallas, Austin, San Antonio & Across Texas</span>
+          </div>
+          <div className="flex items-center gap-3 text-sm text-white/70">
+            <span className="text-blue-400/70">
+              <Icons.Infinity />
+            </span>
+            <span>24/7 Emergency: (212) 555-0199</span>
+          </div>
         </div>
       </div>
+
+      {/* Service Areas */}
+      <div className="space-y-3">
+        <h5 className="text-[10px] font-mono tracking-[0.2em] uppercase text-blue-400/60">
+          Service Areas
+        </h5>
+        <p className="text-xs text-white/50 leading-relaxed">
+          Houston • Dallas • Austin • San Antonio • Fort Worth • Arlington • Plano • El Paso • Corpus Christi • Lubbock & Surrounding Texas Communities
+        </p>
+      </div>
+    </div>
+  );
+};
+
+// ======================
+// CERTIFICATIONS GRID
+// ======================
+const CertificationsGrid = () => {
+  const certifications = [
+    { cert: 'ISO', number: '9001:2024', icon: Icons.Warranty },
+    { cert: 'LEED', number: 'Platinum', icon: Icons.Warranty },
+    { cert: 'BREEAM', number: 'Outstanding', icon: Icons.Warranty },
+    { cert: 'GAF', number: 'Master Elite', icon: Icons.Warranty },
+    { cert: 'CertainTeed', number: 'SELECT ShingleMaster', icon: Icons.Warranty },
+    { cert: 'OSHA', number: 'Certified', icon: Icons.Warranty },
+  ];
+
+  return (
+    <div className="grid grid-cols-2 gap-3 mt-4">
+      {certifications.map((cert, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.05 }}
+          className="relative p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-blue-500/30 transition-all duration-300 group"
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-blue-400/50 group-hover:text-blue-400 transition-colors">
+              <cert.icon />
+            </span>
+            <div>
+              <span className="text-xs font-mono text-blue-400/80">{cert.cert}</span>
+              <p className="text-[10px] text-white/40">{cert.number}</p>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 };
@@ -365,38 +473,7 @@ const SocialLinks = () => {
 };
 
 // ======================
-// AWARDS GRID
-// ======================
-const AwardsGrid = () => {
-  const awards = [
-    { year: '2025', title: 'AIA National Honor Award', org: 'American Institute of Architects' },
-    { year: '2024', title: 'Engineering Excellence Award', org: 'ACEC' },
-    { year: '2023', title: 'Heritage Preservation Medal', org: 'National Trust' },
-    { year: '2022', title: 'Innovation in Steel Design', org: 'AISC' },
-  ];
-
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-      {awards.map((award, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.1 }}
-          className="relative p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10"
-        >
-          <span className="text-xs font-mono text-blue-400/80">{award.year}</span>
-          <h5 className="text-sm font-medium text-white mt-2 mb-1">{award.title}</h5>
-          <p className="text-[10px] text-white/50">{award.org}</p>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-// ======================
-// HORIZONTAL SCROLL MARQUEE
+// HORIZONTAL SCROLL MARQUEE - WITH HOVER EFFECT
 // ======================
 const LegacyMarquee = () => {
   return (
@@ -407,24 +484,24 @@ const LegacyMarquee = () => {
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       >
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="flex items-center gap-8 mx-8">
-            <span className="text-xs font-mono text-blue-400/40">
+          <div key={i} className="flex items-center gap-8 mx-8 group">
+            <span className="text-xs font-mono text-blue-400/40 group-hover:text-blue-400 transition-colors duration-300">
               <Icons.Sparkle />
             </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-white/20">
-              ENGINEERING A5 ROOFING
+            <span className="text-sm uppercase tracking-[0.3em] text-white/20 group-hover:text-white transition-colors duration-300">
+              PRECISION ROOFING
             </span>
-            <span className="text-xs font-mono text-blue-400/40">
+            <span className="text-xs font-mono text-blue-400/40 group-hover:text-blue-400 transition-colors duration-300">
               <Icons.Sparkle />
             </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-white/20">
+            <span className="text-sm uppercase tracking-[0.3em] text-white/20 group-hover:text-white transition-colors duration-300">
               SINCE 2007
             </span>
-            <span className="text-xs font-mono text-blue-400/40">
+            <span className="text-xs font-mono text-blue-400/40 group-hover:text-blue-400 transition-colors duration-300">
               <Icons.Sparkle />
             </span>
-            <span className="text-sm uppercase tracking-[0.3em] text-white/20">
-              PERMANENCE OVER PERFECTION
+            <span className="text-sm uppercase tracking-[0.3em] text-white/20 group-hover:text-white transition-colors duration-300">
+              TRUST • QUALITY • PROTECTION
             </span>
           </div>
         ))}
@@ -434,35 +511,11 @@ const LegacyMarquee = () => {
 };
 
 // ======================
-// MAIN FOOTER - AWARD WINNING
+// MAIN FOOTER - COMPREHENSIVE VERSION
 // ======================
 const Footer = () => {
   const sectionRef = useRef(null);
   const [isClient, setIsClient] = useState(false);
-
-  const companyLinks = [
-    { label: 'Studio', href: '/studio' },
-    { label: 'Manifesto', href: '/manifesto' },
-    { label: 'Process', href: '/process' },
-    { label: 'Careers', href: '/careers' },
-    { label: 'Press', href: '/press' },
-  ];
-
-  const servicesLinks = [
-    { label: 'Residential', href: '/residential' },
-    { label: 'Commercial', href: '/commercial' },
-    { label: 'Heritage', href: '/heritage' },
-    { label: 'Emergency', href: '/emergency' },
-    { label: 'Consulting', href: '/consulting' },
-  ];
-
-  const legalLinks = [
-    { label: 'Privacy', href: '/privacy' },
-    { label: 'Terms', href: '/terms' },
-    { label: 'Licenses', href: '/licenses' },
-    { label: 'Cookies', href: '/cookies' },
-    { label: 'Ethics', href: '/ethics' },
-  ];
 
   useEffect(() => {
     setIsClient(true);
@@ -512,9 +565,9 @@ const Footer = () => {
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `
-                            linear-gradient(to right, #3b82f6 1px, transparent 1px),
-                            linear-gradient(to bottom, #3b82f6 1px, transparent 1px)
-                        `,
+              linear-gradient(to right, #3b82f6 1px, transparent 1px),
+              linear-gradient(to bottom, #3b82f6 1px, transparent 1px)
+            `,
             backgroundSize: '60px 60px',
           }}
         />
@@ -548,100 +601,81 @@ const Footer = () => {
       <QuantumParticles />
 
       {/* ====================== */}
-      {/* MAIN CONTENT */}
+      {/* MAIN CONTENT - COMPREHENSIVE */}
       {/* ====================== */}
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-30">
 
         {/* ====================== */}
-        {/* TOP SECTION */}
+        {/* TOP SECTION - THREE COLUMNS */}
         {/* ====================== */}
-        <div className="grid lg:grid-cols-2 gap-16 pt-24 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-24 pb-16 border-b border-white/10">
 
-          {/* Left Column - Brand */}
-          <div className="space-y-8">
+          {/* Column 1 - Logo, Social, Newsletter (3 columns) */}
+          <div className="lg:col-span-3 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="space-y-6"
+              className="space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-2xl shadow-blue-600/30">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-2xl shadow-blue-600/30">
                   <span className="text-white font-bold text-xl">A5</span>
                 </div>
-
+                <div>
+                  <span className="text-white/90 font-light text-lg block">A5 Roofing</span>
+                  <span className="text-[10px] text-blue-400/60 font-mono tracking-wider">PRECISION • PROTECTION • TRUST</span>
+                </div>
               </div>
 
-              <p className="text-white/60 text-base leading-relaxed max-w-md">
-                Forging architectural permanence through precision engineering and uncompromising craftsmanship since 2007.
+              <p className="text-white/50 text-xs leading-relaxed">
+                Precision roofing built for long-term protection. Dependable inspections, repairs, replacements, and maintenance focused on durability, safety, and honest communication.
               </p>
 
               <SocialLinks />
             </motion.div>
 
             {/* Newsletter */}
-            <div className="space-y-4">
-              <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-                Subscribe to A5 roofing insights
+            <div className="space-y-3">
+              <h4 className="text-[10px] font-mono tracking-[0.2em] uppercase text-white/40">
+                Subscribe to insights
               </h4>
               <NewsletterForm />
             </div>
-          </div>
 
-          {/* Right Column - Studio Location & Contact */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <StudioLocation />
-            <ContactInfo />
-          </div>
-        </div>
-
-        {/* ====================== */}
-        {/* MIDDLE SECTION - LINKS */}
-        {/* ====================== */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-b border-white/10">
-          <FooterLinkGroup title="Studio" links={companyLinks} />
-          <FooterLinkGroup title="Services" links={servicesLinks} />
-          <FooterLinkGroup title="Legal" links={legalLinks} />
-
-          {/* Certifications */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-              Certifications
-            </h4>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-mono text-white/40">
-                  ISO
-                </div>
-                <span className="text-xs text-white/60">9001:2024</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-mono text-white/40">
-                  LEED
-                </div>
-                <span className="text-xs text-white/60">Platinum</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-mono text-white/40">
-                  BREEAM
-                </div>
-                <span className="text-xs text-white/60">Outstanding</span>
-              </div>
+            {/* Quick Links */}
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a href="/warranty" className="text-[10px] text-white/30 hover:text-blue-400 transition-colors flex items-center gap-1">
+                <Icons.Warranty /> Warranty
+              </a>
+              <a href="/financing" className="text-[10px] text-white/30 hover:text-blue-400 transition-colors flex items-center gap-1">
+                <Icons.Financing /> Financing
+              </a>
+              <a href="/insurance" className="text-[10px] text-white/30 hover:text-blue-400 transition-colors flex items-center gap-1">
+                <Icons.Warranty /> Insurance Support
+              </a>
             </div>
           </div>
-        </div>
 
-        {/* ====================== */}
-        {/* AWARDS SECTION */}
-        {/* ====================== */}
-        <div className="py-16 border-b border-white/10">
-          <div className="flex items-center gap-3 mb-10">
-            <Icons.Sparkle />
-            <span className="text-xs font-mono tracking-[0.2em] uppercase text-white/50">
-              Recognition
-            </span>
+          {/* Column 2 - Services (5 columns) */}
+          <div className="lg:col-span-5">
+            <ServiceLinks />
+            <MaterialsSection />
           </div>
-          <AwardsGrid />
+
+          {/* Column 3 - Contact & Certifications (4 columns) */}
+          <div className="lg:col-span-4">
+            <ContactInfo />
+
+            {/* Certifications Grid - Added Back */}
+            <div className="mt-6 pt-4 border-t border-white/5">
+              <h4 className="text-xs font-mono tracking-[0.2em] uppercase text-white/50 flex items-center gap-2 mb-3">
+                <Icons.Sparkle />
+                Certifications & Accreditations
+              </h4>
+              <CertificationsGrid />
+            </div>
+          </div>
         </div>
 
         {/* ====================== */}
@@ -652,11 +686,20 @@ const Footer = () => {
         {/* ====================== */}
         {/* BOTTOM BAR */}
         {/* ====================== */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 py-8 text-xs text-white/40">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-6 text-[10px] text-white/30">
           <div className="flex items-center gap-4">
             <span>© 2026 A5 Roofing</span>
             <span className="w-1 h-1 rounded-full bg-white/20" />
             <span>All rights reserved</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
+            <a href="/licenses" className="hover:text-white transition-colors">Licenses</a>
+            <a href="/sitemap" className="hover:text-white transition-colors">Sitemap</a>
+          </div>
+          <div className="text-white/20">
+            <span className="font-mono">A5 PRECISION. A5 RESULTS.</span>
           </div>
         </div>
       </div>

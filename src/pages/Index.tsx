@@ -70,6 +70,7 @@ const Index = () => {
             <section id="services">
               <Services />
             </section>
+            <TeamValues />
             <section id="portfolio">
               <Portfolio />
             </section>
@@ -77,14 +78,13 @@ const Index = () => {
             <section id="about">
               <HowWeWork />
             </section>
-            <TeamValues />
+
             <section id="contact">
               <QAForm />
             </section>
             <section id="faq">
               <FAQ />
             </section>
-            <LeadCapture />
             <Footer />
           </div>
         </>

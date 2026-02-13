@@ -16,8 +16,6 @@ import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
 import portfolio4 from "@/assets/portfolio-4.jpg";
 import portfolio5 from "@/assets/portfolio-5.jpg";
-import portfolioBefore from "@/assets/portfolio-before.jpg";
-import portfolioAfter from "@/assets/portfolio-after.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,83 +28,82 @@ const projects = [
     title: "Mercer Estate",
     category: "Residential",
     image: portfolio1,
-    size: "large",
     location: "Greenwich, CT",
     year: "2024",
     accent: "from-blue-600 to-blue-800",
     architect: "Foster + Partners",
-    scope: "Full Restoration"
+    scope: "Full Restoration",
+    desc: "A complete restoration of this historic Greenwich estate, preserving its architectural heritage while modernizing its structural systems."
   },
   {
     number: "02",
     title: "Summit Tech Campus",
     category: "Commercial",
     image: portfolio2,
-    size: "small",
     location: "Austin, TX",
     year: "2023",
     accent: "from-blue-500 to-blue-700",
     architect: "Gensler",
-    scope: "New Construction"
+    scope: "New Construction",
+    desc: "A cutting-edge tech campus featuring sustainable materials and innovative roofing systems designed for the Texas climate."
   },
   {
     number: "03",
     title: "Heritage Museum",
     category: "Storm Damage Repair",
     image: portfolio3,
-    size: "small",
     location: "Boston, MA",
     year: "2024",
     accent: "from-blue-700 to-blue-900",
     architect: "Renzo Piano",
-    scope: "Preservation"
+    scope: "Preservation",
+    desc: "Emergency restoration after severe storm damage, preserving priceless artifacts and structural integrity."
   },
   {
     number: "04",
     title: "Eastgate Distribution",
     category: "Industrial",
     image: portfolio4,
-    size: "large",
     location: "Chicago, IL",
     year: "2023",
     accent: "from-blue-600 to-blue-800",
     architect: "SOM",
-    scope: "Structural Upgrade"
+    scope: "Structural Upgrade",
+    desc: "Large-scale industrial facility upgrade with enhanced load-bearing capacity and weather resistance."
   },
   {
     number: "05",
     title: "Whitfield Manor",
     category: "Luxury Estate",
     image: portfolio5,
-    size: "large",
     location: "Los Angeles, CA",
     year: "2024",
     accent: "from-blue-500 to-blue-700",
     architect: "Olson Kundig",
-    scope: "Storm"
-  },
+    scope: "Storm Damage Repair",
+    desc: "Comprehensive restoration of this luxury hillside estate after wildfire damage."
+  }
 ];
 
 // ======================
-// PREMIUM PORTFOLIO ITEM - AWARD WINNING
+// MARQUEE ITEM - DETAILS ONLY ON HOVER
 // ======================
-const PortfolioItem = ({ project, index, onClick }) => {
+const MarqueeItem = ({ project }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const itemRef = useRef(null);
 
-  // 3D Tilt Effect - Premium Spring Physics
+  // 3D Tilt Effect
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springX = useSpring(x, { stiffness: 60, damping: 12, mass: 0.5 });
-  const springY = useSpring(y, { stiffness: 60, damping: 12, mass: 0.5 });
+  const springX = useSpring(x, { stiffness: 200, damping: 20, mass: 0.1 });
+  const springY = useSpring(y, { stiffness: 200, damping: 20, mass: 0.1 });
 
-  const rotateX = useTransform(springY, [-0.4, 0.4], [4, -4]);
-  const rotateY = useTransform(springX, [-0.4, 0.4], [-4, 4]);
+  const rotateX = useTransform(springY, [-0.4, 0.4], [3, -3]);
+  const rotateY = useTransform(springX, [-0.4, 0.4], [-3, 3]);
 
   const handleMouseMove = (e) => {
-    if (!itemRef.current) return;
+    if (!itemRef.current || !isHovered) return;
     const rect = itemRef.current.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
@@ -116,370 +113,395 @@ const PortfolioItem = ({ project, index, onClick }) => {
     y.set(yPct);
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
-  // Intersection Observer for load animation
-  const inView = useInView(itemRef, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (inView) {
-      setTimeout(() => setIsLoaded(true), 100);
-    }
-  }, [inView]);
-
   return (
     <motion.div
       ref={itemRef}
-      initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.9,
-        delay: index * 0.12,
-        ease: [0.215, 0.61, 0.355, 1]
-      }}
-      viewport={{ once: true, margin: "-50px" }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        x.set(0);
+        y.set(0);
+      }}
       onMouseMove={handleMouseMove}
-      onClick={onClick}
       style={{
         rotateX: isHovered ? rotateX : 0,
         rotateY: isHovered ? rotateY : 0,
         transformPerspective: 1200,
-        transformStyle: "preserve-3d"
+        scale: isHovered ? 1.02 : 1,
       }}
-      className={`portfolio-item group relative cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 ${project.size === "large"
-        ? "md:row-span-2 aspect-[3/4]"
-        : "aspect-[4/3]"
-        }`}
+      className="relative w-[200px] sm:w-[240px] md:w-[280px] h-[280px] sm:h-[320px] md:h-[360px] flex-shrink-0 cursor-pointer will-change-transform transition-transform duration-300"
     >
-      {/* Premium Gradient Mesh */}
-      <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/95 via-blue-800/70 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(37,99,235,0.15)_0%,_transparent_70%)]" />
-      </div>
-
-      {/* Animated Border - SVG Drawing Effect */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none z-20">
-        <motion.rect
-          x="2"
-          y="2"
-          width="calc(100% - 4px)"
-          height="calc(100% - 4px)"
-          fill="none"
-          stroke="white"
-          strokeWidth="1.5"
-          strokeDasharray="12 12"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={isHovered ? { pathLength: 1, opacity: 0.6 } : { pathLength: 0, opacity: 0 }}
-          transition={{ duration: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
-        />
-      </svg>
-
-      {/* Image with Parallax Scale */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ scale: isHovered ? 1.08 : 1 }}
-        transition={{ duration: 1.2, ease: [0.215, 0.61, 0.355, 1] }}
-      >
+      {/* Card */}
+      <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl shadow-black/20">
+        {/* Background Image */}
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover"
-          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+            transition: 'transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1)'
+          }}
         />
-      </motion.div>
 
-      {/* Floating Particles on Hover */}
-      {isHovered && (
-        <>
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 rounded-full bg-white/80 z-30"
-              initial={{
-                x: '50%',
-                y: '50%',
-                scale: 0,
-                opacity: 0.8
-              }}
-              animate={{
-                x: [`50%`, `${15 + (i * 12)}%`],
-                y: [`50%`, `${10 + (i * 15)}%`],
-                scale: [0, 1.8, 0],
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{
-                duration: 1.8,
-                delay: i * 0.12,
-                repeat: Infinity,
-                repeatDelay: 0.4,
-                ease: "easeOut"
-              }}
-            />
-          ))}
-        </>
-      )}
+        {/* Base Gradient Overlay - Always visible but subtle */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
 
-      {/* Content Overlay - Animated */}
-      <div className="absolute inset-0 z-30 flex flex-col justify-end p-8 md:p-10">
-        {/* Category Badge with Slide Up */}
+        {/* Blue Overlay on Hover - Slight blue tint */}
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={isHovered ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="mb-3"
-        >
-          <span className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-2xl border border-white/50">
-            <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.accent} animate-pulse`} />
-            <span className="text-[10px] font-black tracking-[0.15em] uppercase text-blue-900">
+          className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 0.3 : 0 }}
+          transition={{ duration: 0.3 }}
+        />
+
+        {/* Animated Border - Only on hover */}
+        {isHovered && (
+          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+            <motion.rect
+              x="2"
+              y="2"
+              width="calc(100% - 4px)"
+              height="calc(100% - 4px)"
+              fill="none"
+              stroke="#3b82f6"
+              strokeWidth="1.5"
+              strokeDasharray="6 6"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+          </svg>
+        )}
+
+        {/* Content - Always visible (basic info) */}
+        <div className="absolute inset-0 p-3 sm:p-4 flex flex-col justify-end">
+          {/* Category Badge - Always visible */}
+          <span className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-white/30 w-fit mb-1 sm:mb-2">
+            <span className={`w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-gradient-to-r ${project.accent}`} />
+            <span className="text-[8px] sm:text-[10px] font-semibold tracking-wider text-white">
               {project.category}
             </span>
-            <span className="text-[8px] font-mono text-blue-400 bg-blue-50 px-1.5 py-0.5 rounded-full">
-              {project.number}
-            </span>
           </span>
-        </motion.div>
 
-        {/* Title with Letter Spacing Animation */}
-        <motion.h3
-          className="font-heading text-white text-3xl md:text-4xl font-bold mb-2 leading-tight"
-          initial={{ y: 40, opacity: 0 }}
-          animate={isHovered ? { y: 0, opacity: 1 } : { y: 40, opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-        >
-          {project.title.split(' ').map((word, i) => (
-            <motion.span
-              key={i}
-              className="inline-block mr-3"
-              animate={isHovered ? {
-                letterSpacing: "0.02em",
-                textShadow: "0 2px 10px rgba(0,0,0,0.3)"
-              } : {
-                letterSpacing: "0em",
-                textShadow: "none"
-              }}
-              transition={{ duration: 0.3, delay: 0.2 + (i * 0.05) }}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </motion.h3>
+          {/* Title - Always visible */}
+          <h3 className="text-base sm:text-lg font-bold text-white mb-0.5 sm:mb-1 leading-tight">
+            {project.title}
+          </h3>
 
-        {/* Metadata Grid */}
-        <motion.div
-          className="grid grid-cols-2 gap-4 mt-4 mb-5"
-          initial={{ y: 40, opacity: 0 }}
-          animate={isHovered ? { y: 0, opacity: 1 } : { y: 40, opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-        >
-          <div className="flex items-center gap-2 text-white/90">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" strokeWidth="1.5" />
-              <circle cx="12" cy="9" r="2.5" strokeWidth="1.5" />
-            </svg>
-            <span className="text-xs font-medium">{project.location}</span>
+          {/* Location & Year - Always visible */}
+          <div className="flex items-center gap-1.5 sm:gap-2 text-white/70 text-[10px] sm:text-xs mb-0.5 sm:mb-1">
+            <span className="truncate max-w-[80px] sm:max-w-none">{project.location}</span>
+            <span className="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-white/30" />
+            <span>{project.year}</span>
           </div>
-          <div className="flex items-center gap-2 text-white/90">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <rect x="3" y="4" width="18" height="18" rx="2" strokeWidth="1.5" />
-              <path d="M8 2v4M16 2v4M3 10h18" strokeWidth="1.5" />
-            </svg>
-            <span className="text-xs font-medium">{project.year}</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/90">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M12 2l7 7-7 7-7-7 7-7z" strokeWidth="1.5" />
-              <path d="M5 17h14" strokeWidth="1.5" />
-              <path d="M5 21h14" strokeWidth="1.5" />
-            </svg>
-            <span className="text-xs font-medium">{project.architect}</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/90">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="M20 12H4M12 4v16" strokeWidth="1.5" />
-            </svg>
-            <span className="text-xs font-medium">{project.scope}</span>
-          </div>
-        </motion.div>
 
-        {/* View Project CTA */}
-        <motion.div
-          className="flex items-center gap-3 mt-2"
-          initial={{ y: 30, opacity: 0 }}
-          animate={isHovered ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-        >
-          <span className="text-xs font-bold tracking-[0.2em] uppercase text-white">
-            View Case Study
-          </span>
-          <motion.div
-            className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-            animate={isHovered ? { x: 5, backgroundColor: "rgba(255,255,255,0.3)" } : { x: 0, backgroundColor: "rgba(255,255,255,0.2)" }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.div>
-        </motion.div>
+          {/* DETAILS - ONLY SHOW ON HOVER */}
+          <AnimatePresence mode="wait">
+            {isHovered && (
+              <motion.div
+                initial={{ opacity: 0, y: 20, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: "auto" }}
+                exit={{ opacity: 0, y: 20, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <p className="text-white/80 text-[8px] sm:text-[10px] leading-relaxed mb-1 sm:mb-2 line-clamp-2">
+                  {project.desc}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="hidden xs:block">
+                    <span className="text-white/40 text-[6px] sm:text-[8px] uppercase">Architect</span>
+                    <p className="text-white text-[8px] sm:text-[10px] font-light truncate max-w-[80px] sm:max-w-none">
+                      {project.architect}
+                    </p>
+                  </div>
+                  <motion.button
+                    className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-600/30 backdrop-blur-sm rounded-lg text-white text-[8px] sm:text-[10px] font-medium flex items-center gap-0.5 sm:gap-1 hover:bg-blue-600/50 transition-colors border border-blue-400/30"
+                    whileHover={{ x: 3 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Handle view project click
+                    }}
+                  >
+                    View
+                    <svg
+                      className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Number Badge */}
+        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 text-white/20 text-2xl sm:text-3xl font-black">
+          {project.number}
+        </div>
       </div>
-
-      {/* Corner Accents */}
-      <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-white/0 group-hover:border-white/40 transition-all duration-700 z-30" />
-      <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-white/0 group-hover:border-white/40 transition-all duration-700 z-30" />
-
-      {/* Premium Shine Effect */}
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none z-40"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 80%)",
-          mixBlendMode: "overlay"
-        }}
-        animate={isHovered ? { scale: 1.2 } : { scale: 1 }}
-        transition={{ duration: 0.8 }}
-      />
     </motion.div>
   );
 };
 
 // ======================
-// BEFORE/AFTER SLIDER - PERFECTLY CENTERED & RESPONSIVE
+// INFINITE MARQUEE - FIXED AND RUNNING
 // ======================
-const BeforeAfterSlider = () => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [sliderValue, setSliderValue] = useState(50);
-  const containerRef = useRef(null);
+const InfiniteMarquee = ({ projects, direction = "left", speed = 45 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const marqueeRef = useRef(null);
+  const animationRef = useRef(null);
 
-  // Handle movement
-  const handleMove = (clientX) => {
-    if (!containerRef.current || !isDragging) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    let x = ((clientX - rect.left) / rect.width) * 100;
-    x = Math.min(Math.max(x, 2), 98);
-    setSliderValue(x);
-  };
+  // Create infinite set of projects (enough for smooth looping)
+  const infiniteProjects = useMemo(() => {
+    // Repeat projects enough times to ensure continuous loop
+    return [...projects, ...projects, ...projects, ...projects, ...projects];
+  }, [projects]);
 
-  // Event handlers
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseMove = (e) => handleMove(e.clientX);
-  const handleTouchStart = () => setIsDragging(true);
-  const handleTouchEnd = () => setIsDragging(false);
-  const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
-
-  // Global event listeners
+  // Initialize GSAP animation
   useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-      window.addEventListener('touchmove', handleTouchMove);
-      window.addEventListener('touchend', handleTouchEnd);
+    if (!marqueeRef.current) return;
+
+    const marquee = marqueeRef.current;
+    const itemWidth = window.innerWidth < 640 ? 216 : window.innerWidth < 768 ? 256 : 296; // 200+16, 240+16, 280+16
+    const totalWidth = itemWidth * projects.length;
+    const distance = direction === "left" ? -totalWidth : totalWidth;
+
+    // Kill any existing animation
+    if (animationRef.current) {
+      animationRef.current.kill();
     }
+
+    // Set initial position based on direction
+    gsap.set(marquee, {
+      x: direction === "left" ? 0 : -totalWidth
+    });
+
+    // Create new animation with proper looping
+    animationRef.current = gsap.to(marquee, {
+      x: distance,
+      duration: speed * (projects.length / 3), // Adjust speed based on number of items
+      repeat: -1,
+      ease: "none",
+      modifiers: {
+        x: (x) => {
+          const value = parseFloat(x);
+          if (direction === "left") {
+            return value <= -totalWidth ? `${value + totalWidth}px` : `${value}px`;
+          } else {
+            return value >= 0 ? `${value - totalWidth}px` : `${value}px`;
+          }
+        }
+      }
+    });
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
     };
-  }, [isDragging]);
+  }, [direction, speed, projects]);
+
+  // Handle hover pause/resume
+  useEffect(() => {
+    if (!animationRef.current) return;
+
+    if (isHovered) {
+      animationRef.current.pause();
+    } else {
+      animationRef.current.resume();
+    }
+  }, [isHovered]);
 
   return (
-    <div className="mt-16 mb-8">
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700" />
-            <span className="text-xs font-black tracking-[0.25em] uppercase text-blue-700">
-              Restoration Showcase
-            </span>
-          </div>
-          <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
-            Before <span className="text-blue-600">&</span> After
-          </h3>
-          <p className="text-slate-600 text-sm md:text-base mt-2 max-w-lg">
-            Witness the transformation of our restoration projects
-          </p>
-        </div>
-        <div className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-blue-200">
-          <span className="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-blue-700">
-            {isDragging ? 'Release' : 'Drag'} to compare
-          </span>
-        </div>
-      </div>
+    <div
+      className="relative overflow-hidden py-3 sm:py-4 md:py-6"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Fade edges - Responsive fade widths */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 xs:w-20 sm:w-24 md:w-32 lg:w-40 z-20 pointer-events-none bg-gradient-to-r from-white via-white/90 to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 xs:w-20 sm:w-24 md:w-32 lg:w-40 z-20 pointer-events-none bg-gradient-to-l from-white via-white/90 to-transparent" />
 
-      {/* Slider Container */}
+      {/* Top/bottom fade - Reduced on mobile */}
+      <div className="absolute inset-x-0 top-0 h-6 sm:h-8 md:h-12 z-20 pointer-events-none bg-gradient-to-b from-white to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-6 sm:h-8 md:h-12 z-20 pointer-events-none bg-gradient-to-t from-white to-transparent" />
+
+      {/* Marquee track */}
       <div
-        ref={containerRef}
-        className="relative aspect-[16/9] max-w-4xl mx-auto overflow-hidden rounded-xl shadow-2xl select-none"
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-        style={{ cursor: isDragging ? 'grabbing' : 'ew-resize' }}
+        ref={marqueeRef}
+        className="flex gap-2 sm:gap-3 md:gap-4"
+        style={{
+          willChange: 'transform',
+          display: 'flex',
+          flexWrap: 'nowrap',
+        }}
       >
-        {/* After Image (Full) */}
-        <img
-          src={portfolioAfter}
-          alt="After restoration"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        {/* Before Image (Clipped) */}
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ width: `${sliderValue}%` }}
-        >
-          <img
-            src={portfolioBefore}
-            alt="Before restoration"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ width: `${100 / (sliderValue / 100)}%`, maxWidth: 'none' }}
+        {infiniteProjects.map((project, index) => (
+          <MarqueeItem
+            key={`${project.number}-${index}`}
+            project={project}
           />
-        </div>
-
-        {/* Slider Line - Perfectly Centered */}
-        <div
-          className="absolute top-0 bottom-0 w-[2px] sm:w-[3px] bg-white shadow-lg z-20"
-          style={{ left: `${sliderValue}%`, transform: 'translateX(-50%)' }}
-        >
-          {/* Slider Handle - Perfectly Centered */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-2 border-blue-600 cursor-grab active:cursor-grabbing"
-            style={{ left: '50%' }}
-          >
-            {/* Double Arrow Icons - Responsive */}
-            <div className="flex gap-0.5 sm:gap-1">
-              <svg width="12" height="12" className="sm:w-4 sm:h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5">
-                <path d="M15 18L9 12L15 6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <svg width="12" height="12" className="sm:w-4 sm:h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5">
-                <path d="M9 18L15 12L9 6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        {/* Labels - Responsive */}
-        <div className="absolute top-2 sm:top-4 left-2 sm:left-4 z-30">
-          <span className="bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/20">
-            Before
-          </span>
-        </div>
-        <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-30">
-          <span className="bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/20">
-            After
-          </span>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 
 // ======================
-// PREMIUM LIGHTBOX - CINEMATIC
+// MAIN PORTFOLIO COMPONENT
+// ======================
+const Portfolio = () => {
+  const sectionRef = useRef(null);
+  const [lightbox, setLightbox] = useState(null);
+  const [isClient, setIsClient] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 60,
+    damping: 25,
+    restDelta: 0.001
+  });
+
+  const headerParallax = useTransform(smoothProgress, [0, 1], [0, -30]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
+  // Split projects into two overlapping rows for visual interest
+  const row1 = projects.slice(0, 3);
+  const row2 = projects.slice(2, 5);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative bg-white overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
+    >
+      {/* Background blue grid and gradients */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Blue gradient lines */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30" />
+        <div className="absolute left-1/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-400/20 to-transparent" />
+        <div className="absolute left-3/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-400/20 to-transparent" />
+
+        {/* Additional blue accents */}
+        <div className="absolute inset-x-0 top-20 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-20" />
+        <div className="absolute inset-x-0 bottom-20 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-20" />
+
+        {/* Light blue grid pattern - Reduced opacity on mobile */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e6f0ff_1px,transparent_1px),linear-gradient(to_bottom,#e6f0ff_1px,transparent_1px)] bg-[size:2rem_2rem] sm:bg-[size:3rem_3rem] md:bg-[size:4rem_4rem] opacity-10 sm:opacity-15 md:opacity-20" />
+
+        {/* Gradient orbs - Hidden on very small screens */}
+        <div className="hidden sm:block absolute top-40 -left-20 w-[200px] sm:w-[300px] md:w-[400px] h-[200px] sm:h-[300px] md:h-[400px] bg-blue-400/5 rounded-full blur-3xl" />
+        <div className="hidden sm:block absolute bottom-40 -right-20 w-[250px] sm:w-[400px] md:w-[500px] h-[250px] sm:h-[400px] md:h-[500px] bg-blue-600/5 rounded-full blur-3xl" />
+        <div className="hidden sm:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[450px] md:w-[600px] h-[300px] sm:h-[450px] md:h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        {/* Header */}
+        <motion.div
+          style={{ y: headerParallax }}
+          className="text-center mb-8 sm:mb-12 md:mb-16"
+        >
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-3 md:mb-4">
+            <div className="w-8 sm:w-10 md:w-12 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700" />
+            <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] sm:tracking-[0.25em] uppercase text-blue-700">
+              Our Work
+            </span>
+            <div className="w-8 sm:w-10 md:w-12 h-0.5 bg-gradient-to-l from-blue-500 to-blue-700" />
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight px-2">
+            Featured<br className="block xs:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-900">
+              {" "}Projects
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Infinite Marquees */}
+        <div className="space-y-2 sm:space-y-3 md:space-y-4">
+          <InfiniteMarquee projects={row1} direction="left" speed={45} />
+          <InfiniteMarquee projects={row2} direction="right" speed={40} />
+        </div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center mt-8 sm:mt-10 md:mt-12"
+        >
+          <button
+            onClick={() => setLightbox(portfolio1)}
+            className="px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-xs sm:text-sm font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-1 sm:gap-2 hover:scale-105 hover:from-blue-700 hover:to-blue-900"
+          >
+            View All Projects
+            <svg
+              width="14"
+              height="14"
+              className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && (
+          <PremiumLightbox
+            image={lightbox}
+            onClose={() => setLightbox(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Bottom Wave */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none">
+        <svg
+          viewBox="0 0 1440 80"
+          className="relative block w-full h-8 sm:h-10 md:h-12 lg:h-16"
+          preserveAspectRatio="none"
+        >
+          <path
+            fill="url(#portfolioWave)"
+            d="M0,32L60,37.3C120,43,240,53,360,53.3C480,53,600,43,720,37.3C840,32,960,32,1080,37.3C1200,43,1320,53,1380,58.7L1440,64L1440,80L1380,80C1320,80,1200,80,1080,80C960,80,840,80,720,80C600,80,480,80,360,80C240,80,120,80,60,80L0,80Z"
+          />
+          <defs>
+            <linearGradient id="portfolioWave" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#2563eb" stopOpacity="0.03" />
+              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#2563eb" stopOpacity="0.03" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+  );
+};
+
+// ======================
+// PREMIUM LIGHTBOX
 // ======================
 const PremiumLightbox = ({ image, onClose }) => {
   useEffect(() => {
@@ -493,290 +515,29 @@ const PremiumLightbox = ({ image, onClose }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 z-[100] bg-blue-950/98 backdrop-blur-xl flex items-center justify-center cursor-pointer p-6 md:p-12"
+      className="fixed inset-0 z-[100] bg-slate-900/98 backdrop-blur-xl flex items-center justify-center cursor-pointer p-3 sm:p-4 md:p-6"
       onClick={onClose}
     >
-      {/* Premium Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:3rem_3rem]" />
-
-      {/* Animated Orbs */}
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.1, 0.2, 0.1],
-          rotate: [0, 90, 0]
-        }}
-        transition={{ duration: 20, repeat: Infinity }}
-        className="absolute top-20 left-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{
-          scale: [1, 1.4, 1],
-          opacity: [0.1, 0.15, 0.1],
-          rotate: [0, -90, 0]
-        }}
-        transition={{ duration: 25, repeat: Infinity }}
-        className="absolute bottom-20 right-20 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"
-      />
-
-      {/* Close Button - Premium */}
       <motion.button
-        initial={{ opacity: 0, y: -30 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="absolute top-6 right-6 md:top-10 md:right-10 z-50 group"
+        exit={{ opacity: 0, y: -20 }}
+        className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6 z-50 bg-gradient-to-r from-blue-600 to-blue-800 backdrop-blur-md border border-blue-400/30 rounded-full px-3 sm:px-4 md:px-5 py-1 sm:py-1.5 md:py-2 text-white text-[10px] sm:text-xs font-medium hover:from-blue-700 hover:to-blue-900 transition-all"
         onClick={onClose}
       >
-        <div className="relative">
-          <div className="absolute inset-0 bg-white/20 rounded-full blur-xl group-hover:bg-white/30 transition-all duration-500" />
-          <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 flex items-center gap-3 text-white hover:bg-white/20 transition-all duration-500">
-            <span className="text-xs font-black tracking-[0.2em] uppercase">Close</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M18 6L6 18M6 6L18 18" strokeLinecap="round" />
-            </svg>
-          </div>
-        </div>
+        Close
       </motion.button>
 
-      {/* Image with Cinematic Reveal */}
       <motion.img
         src={image}
         alt="Project preview"
-        className="max-w-full max-h-[90vh] object-contain relative z-30 rounded-2xl shadow-2xl shadow-blue-950/50"
-        initial={{ scale: 0.9, opacity: 0, y: 40 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 40 }}
-        transition={{
-          duration: 0.7,
-          ease: [0.215, 0.61, 0.355, 1],
-          delay: 0.1
-        }}
+        className="max-w-full max-h-[90vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
       />
-
-      {/* Image Info */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-black/30 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 text-white/80 text-sm"
-      >
-        <span className="flex items-center gap-2.5">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
-          </span>
-          Click anywhere to close • Press ESC
-        </span>
-      </motion.div>
     </motion.div>
-  );
-};
-
-// ======================
-// MAIN PORTFOLIO COMPONENT - AWARD WINNING
-// ======================
-const Portfolio = () => {
-  const sectionRef = useRef(null);
-  const [lightbox, setLightbox] = useState(null);
-  const [isClient, setIsClient] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  // Premium filter system
-  const categories = ["all", "residential", "commercial", "storm damage", "industrial", "luxury estate"];
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === "all") return projects;
-    return projects.filter(p => p.category.toLowerCase() === activeFilter.toLowerCase());
-  }, [activeFilter]);
-
-  // Scroll animations
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 25,
-    restDelta: 0.001
-  });
-
-  const headerParallax = useTransform(smoothProgress, [0, 1], [0, -30]);
-  const bgParallax = useTransform(smoothProgress, [0, 1], [0, 50]);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (!sectionRef.current || !isClient) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.portfolio-reveal',
-        { y: 60, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, [isClient]);
-
-  if (!isClient) return null;
-
-  return (
-    <section
-      ref={sectionRef}
-      className="relative bg-white overflow-hidden py-12 md:py-16"
-    >
-      {/* ====================== */}
-      {/* PREMIUM BACKGROUND LAYERS */}
-      {/* ====================== */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Blue Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e6f0ff_1px,transparent_1px),linear-gradient(to_bottom,#e6f0ff_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] opacity-25" />
-
-        {/* Gradient Orbs */}
-        <motion.div
-          style={{ y: bgParallax }}
-          className="absolute top-40 -left-20 w-[500px] h-[500px] bg-blue-400/5 rounded-full blur-3xl"
-        />
-        <motion.div
-          style={{ y: bgParallax }}
-          className="absolute bottom-40 -right-20 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl"
-        />
-
-        {/* Gradient Fades */}
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/50 to-transparent" />
-        <div className="absolute bottom-0 right-0 w-full h-96 bg-gradient-to-t from-blue-50/50 to-transparent" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
-        {/* ====================== */}
-        {/* SECTION HEADER - CINEMATIC */}
-        {/* ====================== */}
-        <motion.div
-          style={{ y: headerParallax }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8"
-        >
-          <div className="portfolio-reveal">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-12 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800" />
-              <span className="text-xs font-black tracking-[0.25em] uppercase text-blue-700">
-                Portfolio MMXXIV
-              </span>
-            </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] tracking-[-0.02em]">
-              FEATURED<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-900">
-                PROJECTS
-              </span>
-            </h2>
-          </div>
-          <p className="portfolio-reveal text-slate-600 text-lg max-w-md leading-relaxed">
-            A5 Roofing is built on a strong foundation of integrity, discipline, and an unwavering commitment to customer care. Every project we complete reflects careful attention to detail, honest communication, and a genuine focus.
-          </p>
-        </motion.div>
-
-        {/* ====================== */}
-        {/* PREMIUM FILTER TABS */}
-        {/* ====================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap items-center gap-3 mb-16"
-        >
-          {categories.map((cat) => (
-            <motion.button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`relative px-6 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-500 ${activeFilter === cat
-                ? 'text-white'
-                : 'text-slate-600 hover:text-blue-700 bg-white/50 hover:bg-blue-50/80'
-                }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {activeFilter === cat && (
-                <motion.div
-                  layoutId="portfolioFilter"
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full shadow-lg shadow-blue-600/25"
-                  initial={false}
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* ====================== */}
-        {/* AWARD-WINNING PORTFOLIO GRID */}
-        {/* ====================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-32">
-          {filteredProjects.map((project, index) => (
-            <PortfolioItem
-              key={project.title}
-              project={project}
-              index={index}
-              onClick={() => setLightbox(project.image)}
-            />
-          ))}
-        </div>
-
-        {/* ====================== */}
-        {/* PREMIUM BEFORE/AFTER SLIDER */}
-        {/* ====================== */}
-        <BeforeAfterSlider />
-      </div>
-
-      {/* ====================== */}
-      {/* CINEMATIC LIGHTBOX */}
-      {/* ====================== */}
-      <AnimatePresence mode="wait">
-        {lightbox && (
-          <PremiumLightbox
-            image={lightbox}
-            onClose={() => setLightbox(null)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* ====================== */}
-      {/* PREMIUM BOTTOM WAVE */}
-      {/* ====================== */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none">
-        <svg
-          viewBox="0 0 1440 120"
-          className="relative block w-full h-16 md:h-20"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="url(#portfolioWave)"
-            d="M0,64L60,69.3C120,75,240,85,360,80C480,75,600,53,720,48C840,43,960,53,1080,58.7C1200,64,1320,64,1380,64L1440,64L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
-          />
-          <defs>
-            <linearGradient id="portfolioWave" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2563eb" stopOpacity="0.04" />
-              <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.06" />
-              <stop offset="100%" stopColor="#2563eb" stopOpacity="0.04" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </section>
   );
 };
 
