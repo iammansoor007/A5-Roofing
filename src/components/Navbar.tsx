@@ -182,8 +182,8 @@ const Navbar = () => {
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-            ? "bg-white/80 backdrop-blur-xl shadow-lg py-2 border-b border-gray-100" // Optional: keep subtle white when scrolled
-            : "bg-transparent py-4" // ✅ TRANSPARENT when at top
+          ? "bg-white/80 backdrop-blur-xl shadow-lg py-2 border-b border-gray-100" // Optional: keep subtle white when scrolled
+          : "bg-transparent py-4" // ✅ TRANSPARENT when at top
           }`}
       >
         {/* Decorative accent line */}
