@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (min-width: 400px) and (max-width: 750px) {
+  .logooo {
+    transform: translateX(-10px);
+  }
+}
+
+
 @layer base {
   :root {
     --background: 222 73% 44%;
@@ -69,7 +76,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
     letter-spacing: -0.03em;
     line-height: 1.05;

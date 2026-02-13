@@ -4,6 +4,7 @@ import { ChevronDown, X, Menu, Quote, Star, Shield, Zap, Calendar, Building2, Ho
 
 // Import your logo
 import logo from "../assets/logo.png";
+import logo2nd from "../assets/logosecond.png";
 
 // Icon component factories
 const createIconComponent = (IconComponent: any) => () => (
@@ -194,16 +195,16 @@ const Navbar = () => {
             {/* Logo */}
             <motion.a
               href="#"
-              className="flex items-center space-x-3 group"
+              className="flex logooo items-center space-x-3 group"
               onClick={handleLinkClick}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="h-16 w-48 rounded-2xl flex items-center justify-center overflow-hidden">
+              <div className="h-16 w-48 logooo  rounded-2xl flex items-center justify-center overflow-hidden">
                 <img
                   src={logo}
                   alt="Company Logo"
-                  className="h-full w-full object-contain p-1"
+                  className="h-full logooo w-full object-contain p-1"
                 />
               </div>
             </motion.a>
@@ -430,12 +431,12 @@ const Navbar = () => {
             >
               <div className="flex flex-col h-full">
                 {/* Header with Logo */}
-                <div className="p-6 border-b border-gray-200 flex-shrink-0">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="h-12 w-36 rounded-xl flex items-center justify-center overflow-hidden">
+                <div className="p-6                       border-b border-gray-200 flex-shrink-0">
+                  <div className="flex  items-center justify-between">
+                    <div className="flex  items-center space-x-3">
+                      <div className="h-12 w-24 rounded-xl flex items-center justify-center overflow-hidden">
                         <img
-                          src={logo}
+                          src={logo2nd}
                           alt="Company Logo"
                           className="h-full w-full object-contain"
                         />
