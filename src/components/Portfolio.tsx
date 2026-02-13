@@ -152,10 +152,11 @@ const PortfolioItem = ({ project, index, onClick }) => {
         transformPerspective: 1200,
         transformStyle: "preserve-3d"
       }}
-      className={`portfolio-item group relative cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 ${project.size === "large"
-        ? "md:row-span-2 aspect-[3/4] md:aspect-[3/4]"
-        : "aspect-[4/3] md:aspect-[4/3]"
-        }`}
+      className={`portfolio-item group relative cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 ${
+        project.size === "large"
+          ? "md:row-span-2 aspect-[3/4]"
+          : "aspect-[4/3]"
+      }`}
     >
       {/* Premium Gradient Mesh */}
       <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -347,35 +348,21 @@ const PortfolioItem = ({ project, index, onClick }) => {
 };
 
 // ======================
-// PREMIUM BEFORE/AFTER SLIDER - AWARD WINNING
-// ======================
-// PREMIUM BEFORE/AFTER SLIDER - FIXED HANDLE (NO MOVEMENT)
+// BEFORE/AFTER SLIDER - PERFECTLY CENTERED & RESPONSIVE
 // ======================
 const BeforeAfterSlider = () => {
   const [isDragging, setIsDragging] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  const [sliderValue, setSliderValue] = useState(50);
   const containerRef = useRef(null);
 
-  // Premium spring animation for smooth sliding
-  const sliderX = useMotionValue(50);
-  const smoothSliderX = useSpring(sliderX, {
-    stiffness: 120,
-    damping: 25,
-    restDelta: 0.001
-  });
-
-  // Parallax effect for images
-  const beforeScale = useTransform(smoothSliderX, [0, 100], [1.1, 1]);
-  const afterScale = useTransform(smoothSliderX, [0, 100], [1, 1.1]);
-
   // Handle movement
-  const handleMove = useCallback((clientX) => {
+  const handleMove = (clientX) => {
     if (!containerRef.current || !isDragging) return;
     const rect = containerRef.current.getBoundingClientRect();
     let x = ((clientX - rect.left) / rect.width) * 100;
-    x = Math.min(Math.max(x, 3), 97);
-    sliderX.set(x);
-  }, [isDragging, sliderX]);
+    x = Math.min(Math.max(x, 2), 98);
+    setSliderValue(x);
+  };
 
   // Event handlers
   const handleMouseDown = () => setIsDragging(true);
@@ -401,21 +388,10 @@ const BeforeAfterSlider = () => {
     };
   }, [isDragging]);
 
-  // Transform for before image width
-  const beforeWidth = useTransform(smoothSliderX, (v) => `${v}%`);
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.9, ease: [0.215, 0.61, 0.355, 1] }}
-      className="mt-32"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="mt-16 mb-8">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700" />
@@ -423,176 +399,86 @@ const BeforeAfterSlider = () => {
               Restoration Showcase
             </span>
           </div>
-          <h3 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+          <h3 className="text-3xl md:text-4xl font-bold text-slate-900">
             Before <span className="text-blue-600">&</span> After
           </h3>
-          <p className="text-slate-600 text-base mt-3 max-w-lg">
-            Witness the transformation of a 1920s heritage facade into a modern masterpiece.
+          <p className="text-slate-600 text-sm md:text-base mt-2 max-w-lg">
+            Witness the transformation of our restoration projects
           </p>
         </div>
-
-        {/* Interactive Hint */}
-        <motion.div
-          animate={!isDragging ? { y: [0, -5, 0] } : {}}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="flex items-center gap-3 bg-blue-50/80 backdrop-blur-sm px-5 py-3 rounded-full border border-blue-200"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="1.8">
-            <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-2M12 12v8M8 12v4M16 12v6" strokeLinecap="round" />
-          </svg>
-          <span className="text-xs font-bold tracking-[0.2em] uppercase text-blue-700">
-            {isDragging ? 'Release to compare' : 'Drag slider to compare'}
+        <div className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-blue-200">
+          <span className="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-blue-700">
+            {isDragging ? 'Release' : 'Drag'} to compare
           </span>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Premium Comparison Container */}
+      {/* Slider Container */}
       <div
         ref={containerRef}
-        className="relative aspect-[16/9] max-w-6xl mx-auto overflow-hidden rounded-3xl shadow-2xl shadow-blue-900/25 select-none group"
+        className="relative aspect-[16/9] max-w-4xl mx-auto overflow-hidden rounded-xl shadow-2xl select-none"
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         style={{ cursor: isDragging ? 'grabbing' : 'ew-resize' }}
       >
         {/* After Image (Full) */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ scale: afterScale }}
-        >
-          <img
-            src={portfolioAfter}
-            alt="After restoration"
-            className="w-full h-full object-cover"
-          />
-          {/* Premium Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent to-transparent" />
-        </motion.div>
+        <img
+          src={portfolioAfter}
+          alt="After restoration"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
 
         {/* Before Image (Clipped) */}
-        <motion.div
+        <div
           className="absolute inset-0 overflow-hidden"
-          style={{ width: beforeWidth }}
+          style={{ width: `${sliderValue}%` }}
         >
-          <motion.div
-            className="absolute inset-0"
-            style={{ scale: beforeScale }}
-          >
-            <img
-              src={portfolioBefore}
-              alt="Before restoration"
-              className="w-full h-full object-cover"
-            />
-            {/* Premium Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-l from-blue-900/10 via-transparent to-transparent" />
-          </motion.div>
-        </motion.div>
+          <img
+            src={portfolioBefore}
+            alt="Before restoration"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ width: `${100 / (sliderValue / 100)}%`, maxWidth: 'none' }}
+          />
+        </div>
 
-        {/* Animated Divider Line */}
-        <motion.div
-          className="absolute top-0 bottom-0 w-[3px] z-40"
-          style={{ left: useTransform(smoothSliderX, (v) => `${v}%`) }}
+        {/* Slider Line - Perfectly Centered */}
+        <div
+          className="absolute top-0 bottom-0 w-[2px] sm:w-[3px] bg-white shadow-lg z-20"
+          style={{ left: `${sliderValue}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Gradient Line */}
-          <div className="absolute inset-0 w-full bg-gradient-to-b from-blue-400 via-blue-600 to-blue-400 shadow-lg shadow-blue-600/50" />
-
-          {/* ✅ FIXED: Premium Handle - NO MOVEMENT ON HOVER */}
-          <motion.div
-            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border-2 border-blue-600"
-            style={{ x: 0, y: 0 }} // ✅ Force no movement
+          {/* Slider Handle - Perfectly Centered */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-2 border-blue-600 cursor-grab active:cursor-grabbing"
+            style={{ left: '50%' }}
           >
-            {/* Double Arrow Icons - Fixed position */}
-            <div className="flex gap-1.5">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.2">
+            {/* Double Arrow Icons - Responsive */}
+            <div className="flex gap-0.5 sm:gap-1">
+              <svg width="12" height="12" className="sm:w-4 sm:h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5">
                 <path d="M15 18L9 12L15 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.2">
+              <svg width="12" height="12" className="sm:w-4 sm:h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5">
                 <path d="M9 18L15 12L9 6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-
-            {/* Pulse Ring - No movement */}
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-blue-400"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              style={{ x: 0, y: 0 }} // ✅ Force no movement
-            />
-          </motion.div>
-        </motion.div>
-
-        {/* Premium Labels */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="absolute top-6 left-6 z-50"
-        >
-          <div className="bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-full shadow-2xl border border-blue-200">
-            <span className="flex items-center gap-2.5 text-sm font-bold text-blue-800">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600" />
-              </span>
-              BEFORE • 1927
-            </span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4 }}
-          className="absolute top-6 right-6 z-50"
-        >
-          <div className="bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-full shadow-2xl border border-blue-200">
-            <span className="flex items-center gap-2.5 text-sm font-bold text-blue-800">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600" />
-              </span>
-              AFTER • 2024
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Gradient Edge Fade */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-blue-900/20 to-transparent pointer-events-none z-30" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-blue-900/20 to-transparent pointer-events-none z-30" />
-      </div>
-
-      {/* Transformation Stats */}
-      <div className="flex justify-center gap-16 mt-12">
-        <div className="text-center">
-          <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-blue-700 to-blue-900 bg-clip-text text-transparent">
-            45+
-          </div>
-          <div className="text-xs font-semibold tracking-wider text-slate-500 mt-2 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            YEARS RESTORED
           </div>
         </div>
-        <div className="text-center">
-          <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-blue-700 to-blue-900 bg-clip-text text-transparent">
-            100%
-          </div>
-          <div className="text-xs font-semibold tracking-wider text-slate-500 mt-2 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            STRUCTURAL INTEGRITY
-          </div>
+
+        {/* Labels - Responsive */}
+        <div className="absolute top-2 sm:top-4 left-2 sm:left-4 z-30">
+          <span className="bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/20">
+            Before
+          </span>
         </div>
-        <div className="text-center">
-          <div className="text-3xl md:text-4xl font-black bg-gradient-to-br from-blue-700 to-blue-900 bg-clip-text text-transparent">
-            25YR
-          </div>
-          <div className="text-xs font-semibold tracking-wider text-slate-500 mt-2 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-            WARRANTY
-          </div>
+        <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-30">
+          <span className="bg-black/50 backdrop-blur-sm text-white text-[10px] sm:text-xs px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/20">
+            After
+          </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
+
 // ======================
 // PREMIUM LIGHTBOX - CINEMATIC
 // ======================
@@ -800,7 +686,6 @@ const Portfolio = () => {
           </div>
           <p className="portfolio-reveal text-slate-600 text-lg max-w-md leading-relaxed">
             A5 Roofing is built on a strong foundation of integrity, discipline, and an unwavering commitment to customer care. Every project we complete reflects careful attention to detail, honest communication, and a genuine focus.
-
           </p>
         </motion.div>
 
@@ -818,10 +703,11 @@ const Portfolio = () => {
             <motion.button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`relative px-6 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-500 ${activeFilter === cat
-                ? 'text-white'
-                : 'text-slate-600 hover:text-blue-700 bg-white/50 hover:bg-blue-50/80'
-                }`}
+              className={`relative px-6 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-500 ${
+                activeFilter === cat
+                  ? 'text-white'
+                  : 'text-slate-600 hover:text-blue-700 bg-white/50 hover:bg-blue-50/80'
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

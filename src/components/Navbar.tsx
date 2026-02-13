@@ -184,13 +184,13 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
           ? "bg-black/60 backdrop-blur-xl shadow-lg py-2 border-b border-gray-100"
-          : "bg-transparent py-4" // ✅ TRANSPARENT when at top
+          : "bg-transparent py-4"
           }`}
       >
         {/* Decorative accent line */}
         <div className="absolute top-0 left-0 w-full h-[0.75px] bg-gradient-to-r from-blue-400 via-blue-500 to-blue-400" />
 
-        <div className="container mx-auto px-4 lg:px-8 ">
+        <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.a
@@ -200,11 +200,11 @@ const Navbar = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="h-16 w-48 logooo  rounded-2xl flex items-center justify-center overflow-hidden">
+              <div className="h-16 w-48 rounded-2xl flex items-center justify-center overflow-hidden">
                 <img
                   src={logo}
                   alt="Company Logo"
-                  className="h-full logooo w-full object-contain p-1"
+                  className="h-full w-full object-contain p-1"
                 />
               </div>
             </motion.a>
@@ -249,8 +249,6 @@ const Navbar = () => {
                       className="absolute left-1/2 transform -translate-x-1/2 xl:left-0 xl:transform-none top-full mt-2 w-[90vw] max-w-[900px] bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 overflow-hidden"
                       style={{ zIndex: 1000 }}
                     >
-
-
                       {/* Services Grid */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         {services.map((service) => (
@@ -269,11 +267,13 @@ const Navbar = () => {
                             whileHover={{ y: -3 }}
                           >
                             <div className="flex items-start space-x-3 mb-4">
-                              <div className={`h-10 w-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${hoveredService === service.title ? 'bg-blue-600' : 'bg-blue-100 group-hover:bg-blue-600'}`}>
+                              <div className={`h-10 w-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${hoveredService === service.title ? 'bg-blue-600' : 'bg-blue-100 group-hover:bg-blue-600'
+                                }`}>
                                 <service.Icon isHovered={hoveredService === service.title} />
                               </div>
                               <div>
-                                <h3 className={`font-bold text-base mb-1 transition-colors ${hoveredService === service.title ? 'text-blue-700' : 'text-gray-900 group-hover:text-blue-700'}`}>
+                                <h3 className={`font-bold text-base mb-1 transition-colors ${hoveredService === service.title ? 'text-blue-700' : 'text-gray-900 group-hover:text-blue-700'
+                                  }`}>
                                   {service.title}
                                 </h3>
                                 <p className="text-gray-700 text-xs">{service.description}</p>
@@ -283,8 +283,10 @@ const Navbar = () => {
                             <div className="space-y-2 mb-4">
                               {service.items.map((item) => (
                                 <div key={item} className="flex items-center text-sm transition-colors">
-                                  <ChevronDown className={`h-3 w-3 mr-2 rotate-90 flex-shrink-0 transition-colors ${hoveredService === service.title ? 'text-blue-400' : 'text-gray-400 group-hover:text-blue-400'}`} />
-                                  <span className={`truncate transition-colors ${hoveredService === service.title ? 'text-blue-600' : 'text-gray-800 group-hover:text-blue-600'}`}>
+                                  <ChevronDown className={`h-3 w-3 mr-2 rotate-90 flex-shrink-0 transition-colors ${hoveredService === service.title ? 'text-blue-400' : 'text-gray-400 group-hover:text-blue-400'
+                                    }`} />
+                                  <span className={`truncate transition-colors ${hoveredService === service.title ? 'text-blue-600' : 'text-gray-800 group-hover:text-blue-600'
+                                    }`}>
                                     {item}
                                   </span>
                                 </div>
@@ -293,7 +295,10 @@ const Navbar = () => {
 
                             <div className="flex flex-wrap gap-1.5">
                               {service.features.map((feature) => (
-                                <span key={feature} className={`px-2 py-1 text-xs rounded-full border transition-colors ${hoveredService === service.title ? 'bg-blue-100 text-blue-700 border-blue-200' : 'bg-blue-100 text-blue-700 border-blue-200 group-hover:bg-blue-100'}`}>
+                                <span key={feature} className={`px-2 py-1 text-xs rounded-full border transition-colors ${hoveredService === service.title
+                                  ? 'bg-blue-100 text-blue-700 border-blue-200'
+                                  : 'bg-blue-100 text-blue-700 border-blue-200 group-hover:bg-blue-100'
+                                  }`}>
                                   {feature}
                                 </span>
                               ))}
@@ -353,7 +358,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* ✅ FIXED: Primary CTA Button - Only this line changed */}
+            {/* Primary CTA Button */}
             <motion.div
               className="hidden lg:flex items-center"
               whileHover={{ scale: 1.02 }}
@@ -374,7 +379,6 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div className="flex items-center space-x-4 lg:hidden">
-
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors"
@@ -408,7 +412,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Sidebar */}
+      {/* Mobile Sidebar - SMOOTH BUTTERY ANIMATION */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -417,6 +421,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }} // ✅ Smooth cubic-bezier
               onClick={() => setIsMenuOpen(false)}
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
             />
@@ -426,14 +431,18 @@ const Navbar = () => {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              transition={{
+                type: "tween", // ✅ Changed from "spring" to "tween" for smoother control
+                duration: 0.4, // ✅ Precise duration
+                ease: [0.25, 0.1, 0.25, 1] // ✅ Buttery smooth cubic-bezier
+              }}
               className="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 lg:hidden shadow-2xl border-l border-gray-200 overflow-hidden"
             >
               <div className="flex flex-col h-full">
                 {/* Header with Logo */}
-                <div className="p-6                       border-b border-gray-200 flex-shrink-0">
-                  <div className="flex  items-center justify-between">
-                    <div className="flex  items-center space-x-3">
+                <div className="p-6 border-b border-gray-200 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
                       <div className="h-12 w-24 rounded-xl flex items-center justify-center overflow-hidden">
                         <img
                           src={logo2nd}
@@ -502,8 +511,6 @@ const Navbar = () => {
                         ))}
                       </div>
                     </div>
-
-
                   </div>
                 </div>
 
