@@ -152,11 +152,10 @@ const PortfolioItem = ({ project, index, onClick }) => {
         transformPerspective: 1200,
         transformStyle: "preserve-3d"
       }}
-      className={`portfolio-item group relative cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 ${
-        project.size === "large"
-          ? "md:row-span-2 aspect-[3/4]"
-          : "aspect-[4/3]"
-      }`}
+      className={`portfolio-item group relative cursor-pointer overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 ${project.size === "large"
+        ? "md:row-span-2 aspect-[3/4]"
+        : "aspect-[4/3]"
+        }`}
     >
       {/* Premium Gradient Mesh */}
       <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -703,11 +702,10 @@ const Portfolio = () => {
             <motion.button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`relative px-6 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-500 ${
-                activeFilter === cat
-                  ? 'text-white'
-                  : 'text-slate-600 hover:text-blue-700 bg-white/50 hover:bg-blue-50/80'
-              }`}
+              className={`relative px-6 py-3 rounded-full text-xs font-bold tracking-[0.15em] uppercase transition-all duration-500 ${activeFilter === cat
+                ? 'text-white'
+                : 'text-slate-600 hover:text-blue-700 bg-white/50 hover:bg-blue-50/80'
+                }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
