@@ -185,7 +185,7 @@ const FeatureCard = ({ feature, index }) => {
                     className="text-sm md:text-base text-slate-600 leading-relaxed"
                     itemProp="description"
                 >
-                    {feature.description}
+                   
                 </p>
 
                 {/* SEO metadata */}
